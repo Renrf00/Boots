@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
         {
             newLinearVelocity =
                 // I'm not directly multiplying horizontalVelocity by maxSpeed so the player decelerates gradualy instead of suddenly
-                horizontalVelocity.normalized * (maxSpeed + (rb.linearVelocity.x - maxSpeed) / 2) +
+                horizontalVelocity.normalized * (maxSpeed + (horizontalVelocity.magnitude - maxSpeed) / 2) +
                 new Vector3(0, rb.linearVelocity.y, 0);
             
             rb.linearVelocity = newLinearVelocity;
