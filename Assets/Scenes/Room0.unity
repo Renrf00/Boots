@@ -613,8 +613,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1975898617}
   rotationSpeed: 1000
-  rotationXHighClamp: 60
-  rotationXLowClamp: -90
+  rotationXHighClamp: 90
+  rotationXLowClamp: -60
 --- !u!1001 &648066378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2381,8 +2381,8 @@ MonoBehaviour:
   groundCollision: 0
   groundRay: 0
   currentCollisions: []
-  speed: 5
-  maxSpeed: 10
+  speed: 7
+  maxSpeed: 7
   dashModule: 1
 --- !u!136 &1975898621
 CapsuleCollider:
