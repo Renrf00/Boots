@@ -650,7 +650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5136817476384442141, guid: 05b1aedc7eb6042aa961027e48c73a3c, type: 3}
       propertyPath: distanceToEnd
-      value: -9.5
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 5136817476384442141, guid: 05b1aedc7eb6042aa961027e48c73a3c, type: 3}
       propertyPath: gizmosColor.a
@@ -1108,7 +1108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5136817476384442141, guid: 05b1aedc7eb6042aa961027e48c73a3c, type: 3}
       propertyPath: distanceToEnd
-      value: 9.5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5136817476384442141, guid: 05b1aedc7eb6042aa961027e48c73a3c, type: 3}
       propertyPath: gizmosColor.a
