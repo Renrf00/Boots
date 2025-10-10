@@ -1235,6 +1235,18 @@ PrefabInstance:
       propertyPath: speed
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: -918092080837684229, guid: 3cb509b21751a4a4bb25aeedb528db61, type: 3}
+      propertyPath: gizmosColor.a
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: -918092080837684229, guid: 3cb509b21751a4a4bb25aeedb528db61, type: 3}
+      propertyPath: gizmosColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -918092080837684229, guid: 3cb509b21751a4a4bb25aeedb528db61, type: 3}
+      propertyPath: gizmosColor.g
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3477670417032191250, guid: 3cb509b21751a4a4bb25aeedb528db61, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11
@@ -2106,6 +2118,18 @@ PrefabInstance:
       propertyPath: speed
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: -918092080837684229, guid: 3cb509b21751a4a4bb25aeedb528db61, type: 3}
+      propertyPath: gizmosColor.a
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: -918092080837684229, guid: 3cb509b21751a4a4bb25aeedb528db61, type: 3}
+      propertyPath: gizmosColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -918092080837684229, guid: 3cb509b21751a4a4bb25aeedb528db61, type: 3}
+      propertyPath: gizmosColor.g
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3477670417032191250, guid: 3cb509b21751a4a4bb25aeedb528db61, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11
@@ -2267,6 +2291,18 @@ PrefabInstance:
     - target: {fileID: 7021402953253622298, guid: 8d209c2f64b084d6299604499ba3554e, type: 3}
       propertyPath: distanceToEnd
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7021402953253622298, guid: 8d209c2f64b084d6299604499ba3554e, type: 3}
+      propertyPath: gizmosColor.a
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 7021402953253622298, guid: 8d209c2f64b084d6299604499ba3554e, type: 3}
+      propertyPath: gizmosColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7021402953253622298, guid: 8d209c2f64b084d6299604499ba3554e, type: 3}
+      propertyPath: gizmosColor.g
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
