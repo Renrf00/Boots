@@ -105,10 +105,22 @@ public class PlayerController : MonoBehaviour
 
     private void LimitSpeed()
     {
-        //tend speed to less than max speed
-        if (rb.linearVelocity.magnitude > maxSpeed)
+        Vector3 horizontalVelocity = new Vector3(
+            rb.linearVelocity.x,
+            0,
+            rb.linearVelocity.z);
+
+        Vector3 newLinearVelocity;
+
+        //tend horizontal speed to less than max speed
+        if (horizontalVelocity.magnitude > maxSpeed)
         {
-            rb.linearVelocity = rb.linearVelocity.normalized * (maxSpeed + (rb.linearVelocity.magnitude - maxSpeed) / 2);
+            newLinearVelocity =
+                // I'm not directly multiplying horizontalVelocity by maxSpeed so the player decelerates gradualy instead of suddenly
+                horizontalVelocity.normalized * (maxSpeed + (rb.linearVelocity.x - maxSpeed) / 2) +
+                new Vector3(0, rb.linearVelocity.y, 0);
+            
+            rb.linearVelocity = newLinearVelocity;
         }
     }
 }
