@@ -62,6 +62,6 @@ public class MovingObject : MonoBehaviour
 
         Gizmos.color = gizmosColor;
         Gizmos.DrawLine(transform.position, transform.position + direction * distanceToEnd);
-        Gizmos.DrawCube(transform.position + direction * distanceToEnd + new Vector3(0, 0.5f, 0), GetComponent<BoxCollider>().size);
+        Gizmos.DrawCube(transform.position + direction * distanceToEnd + GetComponent<BoxCollider>().center, GetComponent<BoxCollider>().size);
     }
 }

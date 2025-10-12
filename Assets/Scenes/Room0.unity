@@ -1301,6 +1301,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3477670417032191250, guid: 3cb509b21751a4a4bb25aeedb528db61, type: 3}
   m_PrefabInstance: {fileID: 1153530180}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1166504814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1166504815}
+  m_Layer: 0
+  m_Name: Respawn point room0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1166504815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166504814}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1182176086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,6 +1913,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2811731386690861870, guid: d7cdc5c6b61914e70ad6f9e5b6b88998, type: 3}
   m_PrefabInstance: {fileID: 1065321407}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1723901973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1723901974}
+  - component: {fileID: 1723901975}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1723901974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723901973}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.1077683, y: 7.9045362, z: -0.58022803}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1723901975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723901973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d59113610390a847bb65fe0467d8e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  respawnPoint: {fileID: 1774449864}
 --- !u!1 &1728257599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,6 +2003,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1635438231602911959, guid: 5c3fe247cd2c74901b190cedc3e50913, type: 3}
   m_PrefabInstance: {fileID: 648066378}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1774449863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1774449864}
+  m_Layer: 0
+  m_Name: Respawn point start
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1774449864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774449863}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6, z: -18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1809654968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5497400320231745668, guid: bee37b6ee1ddb4306a4a022a9458feef, type: 3}
@@ -2322,3 +2430,6 @@ SceneRoots:
   - {fileID: 2219654304228582308}
   - {fileID: 1728257600}
   - {fileID: 1577913123}
+  - {fileID: 1723901974}
+  - {fileID: 1774449864}
+  - {fileID: 1166504815}

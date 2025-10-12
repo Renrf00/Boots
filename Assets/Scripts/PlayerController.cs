@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerDash = GetComponent<DashModule>();
 
         if (dashModule)
         {
