@@ -23,7 +23,7 @@ public class DashModule : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
         playerTransform = GetComponent<Transform>();
-        
+
         playerCamera = GetComponentInChildren<Camera>();
         cameraTransform = GetComponentInChildren<Transform>();
 
@@ -44,6 +44,10 @@ public class DashModule : MonoBehaviour
         {
             StopDash();
         }
+        if (Input.GetKeyUp(KeyCode.LeftShift) || (playerController.groundCollision && playerController.groundRay))
+        {
+            playerController.speedLimit = SpeedLimit.HardLimit;
+        }
     }
     private void Dash()
     {
@@ -52,7 +56,6 @@ public class DashModule : MonoBehaviour
         {
             playerCamera.fieldOfView += Time.deltaTime;
         }
-
 
         // calculate direction based on camera (X) and player (Y) rotation
         direction = Quaternion.Euler(
@@ -65,6 +68,8 @@ public class DashModule : MonoBehaviour
         rb.linearVelocity = direction * speed;
 
         rb.useGravity = false;
+
+        playerController.speedLimit = SpeedLimit.SoftLimit;
 
         currentDashCharge -= Time.deltaTime;
     }

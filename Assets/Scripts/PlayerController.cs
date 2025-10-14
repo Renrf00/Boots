@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
                 speed * Time.deltaTime * Input.GetAxis("Horizontal"),
                 0,
                 speed * Time.deltaTime * Input.GetAxis("Vertical")),
-                 Space.Self);
+                Space.Self);
     }
     private void Jump()
     {
