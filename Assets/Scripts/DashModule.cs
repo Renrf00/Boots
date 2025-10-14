@@ -6,6 +6,7 @@ public class DashModule : MonoBehaviour
     public Camera playerCamera;
     public Rigidbody rb;
     public PlayerController playerController;
+    public ControlSpeed controlSpeed;
     public Transform playerTransform;
     public Transform cameraTransform;
 
@@ -22,13 +23,14 @@ public class DashModule : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
+        controlSpeed = GetComponent<ControlSpeed>();
         playerTransform = GetComponent<Transform>();
 
         currentDashCharge = dashCharge;
     }
     void Update()
     {
-        if (playerController.groundCollision && playerController.groundRay && currentDashCharge < dashCharge)
+        if (playerController.grounded && currentDashCharge < dashCharge)
         {
             currentDashCharge += Time.deltaTime;
         }
@@ -41,9 +43,9 @@ public class DashModule : MonoBehaviour
         {
             StopDash();
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift) || (playerController.groundCollision && playerController.groundRay))
+        if (Input.GetKeyUp(KeyCode.LeftShift) || playerController.grounded)
         {
-            playerController.speedLimit = SpeedLimit.HardLimit;
+            controlSpeed.speedLimit = SpeedLimit.Walking;
         }
     }
     private void Dash()
@@ -66,7 +68,7 @@ public class DashModule : MonoBehaviour
 
         rb.useGravity = false;
 
-        playerController.speedLimit = SpeedLimit.SoftLimit;
+        controlSpeed.speedLimit = SpeedLimit.Dash;
 
         currentDashCharge -= Time.deltaTime;
     }
@@ -79,5 +81,7 @@ public class DashModule : MonoBehaviour
         }
 
         rb.useGravity = true;
+
+        controlSpeed.speedLimit = SpeedLimit.PostDash;
     }
 }

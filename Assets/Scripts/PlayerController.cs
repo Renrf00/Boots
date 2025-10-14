@@ -6,21 +6,21 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     public Rigidbody rb;
     public DashModule playerDash;
+    public ControlSpeed controlSpeed;
 
     [Header("Jump controls")]
     public float jumpSpeed = 5;
     public float jumpCooldown = 0.4f;
     public float currentJumpCooldown;
+    public bool grounded = false;
     // did this so the player can't jump by touching the side of a "Floor" object (collision) or jump before touching the ground (Raycast)
-    public bool groundCollision = false;
-    public bool groundRay = false;
+    [HideInInspector] public bool groundCollision = false;
+    [HideInInspector] public bool groundRay = false;
     // you could loose the ability to jump if you were on the ground and left the collision of another "Floor" obstacle so I created a list of the current collisions
     public List<GameObject> currentCollisions = new List<GameObject>();
 
     [Header("Movement controls")]
     public float speed = 5;
-    public float maxSpeed = 7;
-    [HideInInspector] public SpeedLimit speedLimit = SpeedLimit.HardLimit;
 
     [Header("Modules")]
     public bool dashModule = true;
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerDash = GetComponent<DashModule>();
+        controlSpeed = GetComponent<ControlSpeed>();
 
         if (dashModule)
         {
@@ -52,18 +53,21 @@ public class PlayerController : MonoBehaviour
             transform.parent = null;
         }
 
+        if (groundRay && groundCollision)
+            grounded = true;
+        else
+            grounded = false;
+
         // lower jump cooldown also here so you don't have a lower cooldown
         if (currentJumpCooldown > 0)
             currentJumpCooldown -= Time.deltaTime;
 
         Move();
 
-        if (groundCollision && groundRay && currentJumpCooldown <= 0 && Input.GetKey(KeyCode.Space))
+        if (grounded && currentJumpCooldown <= 0 && Input.GetKey(KeyCode.Space))
         {
             Jump();
         }
-
-        LimitSpeed(speedLimit);
     }
 
     // if you collide with two "Floor" objects at the same time one won't register
@@ -103,49 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
         currentJumpCooldown = jumpCooldown;
+
+        controlSpeed.speedLimit = SpeedLimit.Jumping;
     }
-
-    private void LimitSpeed(SpeedLimit speedLimit)
-    {
-        Vector3 horizontalVelocity = new Vector3(
-            rb.linearVelocity.x,
-            0,
-            rb.linearVelocity.z);
-
-        Vector3 newLinearVelocity;
-
-        float multiplySpeed = 1;
-        
-        switch (speedLimit)
-        {
-            case SpeedLimit.None:
-                multiplySpeed = 1;
-                break;
-            case SpeedLimit.HardLimit:
-                // For sudden speed decrease
-                multiplySpeed = maxSpeed;
-                break;
-            case SpeedLimit.SoftLimit:
-                // For decreasing player speed gradualy
-                multiplySpeed = maxSpeed + (horizontalVelocity.magnitude - maxSpeed) / 2;
-                break;
-        }
-
-        //tend horizontal speed to less than max speed
-        if (horizontalVelocity.magnitude > maxSpeed)
-        {
-            newLinearVelocity =
-                horizontalVelocity.normalized * multiplySpeed +
-                new Vector3(0, rb.linearVelocity.y, 0);
-
-            rb.linearVelocity = newLinearVelocity;
-        }
-    }
-}
-
-public enum SpeedLimit
-{
-    None,
-    HardLimit,
-    SoftLimit
 }
