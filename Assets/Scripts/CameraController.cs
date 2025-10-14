@@ -14,6 +14,8 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        player = GetComponentInParent<Transform>();
+        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }

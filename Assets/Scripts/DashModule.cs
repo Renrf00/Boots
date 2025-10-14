@@ -20,6 +20,13 @@ public class DashModule : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        playerController = GetComponent<PlayerController>();
+        playerTransform = GetComponent<Transform>();
+        
+        playerCamera = GetComponentInChildren<Camera>();
+        cameraTransform = GetComponentInChildren<Transform>();
+
         currentDashCharge = dashCharge;
     }
     void Update()

@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement controls")]
     public float speed = 5;
     public float maxSpeed = 7;
+    [HideInInspector] public SpeedLimit speedLimit = SpeedLimit.HardLimit;
 
     [Header("Modules")]
     public bool dashModule = true;
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        LimitSpeed();
+        LimitSpeed(speedLimit);
     }
 
     // if you collide with two "Floor" objects at the same time one won't register
@@ -104,7 +105,7 @@ public class PlayerController : MonoBehaviour
         currentJumpCooldown = jumpCooldown;
     }
 
-    private void LimitSpeed()
+    private void LimitSpeed(SpeedLimit speedLimit)
     {
         Vector3 horizontalVelocity = new Vector3(
             rb.linearVelocity.x,
@@ -113,15 +114,38 @@ public class PlayerController : MonoBehaviour
 
         Vector3 newLinearVelocity;
 
+        float multiplySpeed = 1;
+        
+        switch (speedLimit)
+        {
+            case SpeedLimit.None:
+                multiplySpeed = 1;
+                break;
+            case SpeedLimit.HardLimit:
+                // For sudden speed decrease
+                multiplySpeed = maxSpeed;
+                break;
+            case SpeedLimit.SoftLimit:
+                // For decreasing player speed gradualy
+                multiplySpeed = maxSpeed + (horizontalVelocity.magnitude - maxSpeed) / 2;
+                break;
+        }
+
         //tend horizontal speed to less than max speed
         if (horizontalVelocity.magnitude > maxSpeed)
         {
             newLinearVelocity =
-                // I'm not directly multiplying horizontalVelocity by maxSpeed so the player decelerates gradualy instead of suddenly
-                horizontalVelocity.normalized * (maxSpeed + (horizontalVelocity.magnitude - maxSpeed) / 2) +
+                horizontalVelocity.normalized * multiplySpeed +
                 new Vector3(0, rb.linearVelocity.y, 0);
-            
+
             rb.linearVelocity = newLinearVelocity;
         }
     }
+}
+
+public enum SpeedLimit
+{
+    None,
+    HardLimit,
+    SoftLimit
 }
