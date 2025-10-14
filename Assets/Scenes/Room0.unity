@@ -1316,7 +1316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1166504815
 Transform:
   m_ObjectHideFlags: 0
@@ -1497,6 +1497,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c3fe247cd2c74901b190cedc3e50913, type: 3}
+--- !u!1 &1217352087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 751851353045747632, guid: bf781d678413f4a349bf63dc7a79dc77, type: 3}
+  m_PrefabInstance: {fileID: 2219654304228582308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1427433301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1929,7 +1934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1723901974
 Transform:
   m_ObjectHideFlags: 0
@@ -1957,7 +1962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d59113610390a847bb65fe0467d8e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1217352087}
   respawnPoint: {fileID: 1774449864}
 --- !u!1 &1728257599
 GameObject:
@@ -2018,7 +2023,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1774449864
 Transform:
   m_ObjectHideFlags: 0

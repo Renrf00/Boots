@@ -24,9 +24,6 @@ public class DashModule : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         playerTransform = GetComponent<Transform>();
 
-        playerCamera = GetComponentInChildren<Camera>();
-        cameraTransform = GetComponentInChildren<Transform>();
-
         currentDashCharge = dashCharge;
     }
     void Update()
