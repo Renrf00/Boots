@@ -41,7 +41,7 @@ public class MovingObject : MonoBehaviour
 
     void Update()
     {
-        transform.position = (0.5f + Mathf.Sin(Time.time * speed * Mathf.PI) / 2) * startingPosition + direction * distanceToEnd;
+        transform.position =  startingPosition + direction * distanceToEnd * (0.5f + Mathf.Sin(Time.time * speed * Mathf.PI) / 2);
     }
     void OnDrawGizmosSelected()
     {

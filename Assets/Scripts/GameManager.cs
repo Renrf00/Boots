@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : ScriptableObject
 {
     [Header("References")]
     public GameObject player;

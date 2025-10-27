@@ -45,7 +45,7 @@ public class DashModule : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || playerController.grounded)
         {
-            controlSpeed.speedLimit = SpeedLimit.Walking;
+            controlSpeed.speedLimit = SpeedLimit.Grounded;
         }
     }
     private void Dash()
@@ -82,6 +82,6 @@ public class DashModule : MonoBehaviour
 
         rb.useGravity = true;
 
-        controlSpeed.speedLimit = SpeedLimit.PostDash;
+        controlSpeed.speedLimit = SpeedLimit.Airborn;
     }
 }

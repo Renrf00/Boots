@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
             playerDash.enabled = true;
         }
     }
+    
     void FixedUpdate()
     {
         // do some raycasts + parent moving objects it detects
@@ -83,6 +84,7 @@ public class PlayerController : MonoBehaviour
             groundCollision = true;
         }
     }
+
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.layer == 7)
@@ -105,11 +107,12 @@ public class PlayerController : MonoBehaviour
                 speed * Time.deltaTime * Input.GetAxis("Vertical")),
                 Space.Self);
     }
+
     private void Jump()
     {
         rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
         currentJumpCooldown = jumpCooldown;
 
-        controlSpeed.speedLimit = SpeedLimit.Jumping;
+        controlSpeed.speedLimit = SpeedLimit.Airborn;
     }
 }

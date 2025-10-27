@@ -7,7 +7,7 @@ public class ControlSpeed : MonoBehaviour
     public Rigidbody rb;
 
     [Header("Speed control")]
-    public SpeedLimit speedLimit = SpeedLimit.Walking;
+    public SpeedLimit speedLimit = SpeedLimit.Grounded;
     public float maxSpeed = 7;
     public bool limitYAxis = false;
 
@@ -16,7 +16,7 @@ public class ControlSpeed : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         LimitSpeed(speedLimit, limitYAxis);
     }
@@ -40,7 +40,7 @@ public class ControlSpeed : MonoBehaviour
         switch (speedLimit)
         {
 
-            case SpeedLimit.Jumping:
+            case SpeedLimit.Airborn:
                 multiplySpeed = maxSpeed + (horizontalVelocity.magnitude - maxSpeed) / 2;
                 limitYAxis = false;
                 break;
@@ -50,12 +50,7 @@ public class ControlSpeed : MonoBehaviour
                 limitYAxis = true;
                 break;
 
-            case SpeedLimit.PostDash:
-                multiplySpeed = maxSpeed + (horizontalVelocity.magnitude - maxSpeed) / 2;
-                limitYAxis = true;
-                break;
-
-            // default is Speedlimit.Walking
+            // default is Speedlimit.Grounded
             default:
                 multiplySpeed = maxSpeed;
                 limitYAxis = false;
@@ -66,7 +61,7 @@ public class ControlSpeed : MonoBehaviour
         if (horizontalVelocity.magnitude > maxSpeed)
         {
             if (limitYAxis)
-                newLinearVelocity = multiplySpeed * (horizontalVelocity.normalized + verticalVelocity.normalized);
+                newLinearVelocity = multiplySpeed * (horizontalVelocity + verticalVelocity).normalized;
             else
                 newLinearVelocity = multiplySpeed * horizontalVelocity.normalized + verticalVelocity;   
             
@@ -77,8 +72,7 @@ public class ControlSpeed : MonoBehaviour
 
 public enum SpeedLimit
 {
-    Walking,
-    Jumping,
+    Grounded,
+    Airborn,
     Dash,
-    PostDash
 }
