@@ -1402,9 +1402,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1217352091}
-  speedLimit: 0
-  maxSpeed: 7
-  limitYAxis: 0
 --- !u!1 &1429241867
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,6 +2373,14 @@ PrefabInstance:
     - target: {fileID: 751851353045747632, guid: bf781d678413f4a349bf63dc7a79dc77, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356214097620001100, guid: bf781d678413f4a349bf63dc7a79dc77, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1217352091}
+    - target: {fileID: 6323390421189503719, guid: bf781d678413f4a349bf63dc7a79dc77, type: 3}
+      propertyPath: m_Constraints
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

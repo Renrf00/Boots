@@ -3,25 +3,14 @@ using UnityEngine;
 
 public class ControlSpeed : MonoBehaviour
 {
-    [Header("References")]
-    public Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
 
-    [Header("Speed control")]
-    public SpeedLimit speedLimit = SpeedLimit.Grounded;
-    public float maxSpeed = 7;
-    public bool limitYAxis = false;
-
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
-
-    void LateUpdate()
-    {
-        LimitSpeed(speedLimit, limitYAxis);
-    }
     
-    private void LimitSpeed(SpeedLimit speedLimit, bool limitYAxis)
+    public void LimitSpeed(float maxSpeed, SpeedLimit speedLimit, bool limitYAxis)
     {
         Vector3 horizontalVelocity = new Vector3(
             rb.linearVelocity.x,

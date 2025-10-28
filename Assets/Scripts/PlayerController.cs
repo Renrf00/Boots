@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NUnit.Framework.Internal.Filters;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public DashModule playerDash;
     public ControlSpeed controlSpeed;
 
-    [Header("Jump controls")]
+    [Header("Jump control")]
     public float jumpSpeed = 5;
     public float jumpCooldown = 0.4f;
     public float currentJumpCooldown;
@@ -19,10 +20,19 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool groundCollision = false;
     [HideInInspector] public bool groundRay = false;
     // you could loose the ability to jump if you were on the ground and left the collision of another "Floor" obstacle so I created a list of the current collisions
-    public List<GameObject> currentCollisions = new List<GameObject>();
 
-    [Header("Movement controls")]
+    [Header("Movement control")]
     public float speed = 5;
+
+    [Header("Speed control")]
+    public SpeedLimit speedLimit = SpeedLimit.Grounded;
+    public float maxSpeed = 7;
+    public bool limitYAxis = false;
+
+    [Header("Constrains")]
+    public bool disableMovement = false;
+    // public bool disableJump = false;
+    // public bool disableDash = true;
 
     [Header("Modules")]
     public bool dashModule = true;
@@ -37,6 +47,24 @@ public class PlayerController : MonoBehaviour
         {
             playerDash.enabled = true;
         }
+    }
+
+    void Update()
+    {
+        if (groundRay && groundCollision)
+            grounded = true;
+        else
+            grounded = false;
+
+        // lower jump cooldown also here so you don't have a lower cooldown
+        if (currentJumpCooldown > 0)
+            currentJumpCooldown -= Time.deltaTime;
+
+        if (grounded && playerDash.currentDashCharge < playerDash.dashCharge)
+            playerDash.currentDashCharge += Time.deltaTime;
+
+        Mathf.Clamp(currentJumpCooldown, 0, jumpCooldown);
+        Mathf.Clamp(playerDash.currentDashCharge, 0, playerDash.dashCharge);
     }
     
     void FixedUpdate()
@@ -55,32 +83,30 @@ public class PlayerController : MonoBehaviour
             groundRay = false;
             transform.parent = null;
         }
+        
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            playerDash.Dash();
+        }
 
-        if (groundRay && groundCollision)
-            grounded = true;
-        else
-            grounded = false;
-
-        // lower jump cooldown also here so you don't have a lower cooldown
-        if (currentJumpCooldown > 0)
-            currentJumpCooldown -= Time.deltaTime;
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (grounded && currentJumpCooldown <= 0)
+            {
+                Jump();
+            }
+        }
 
         Move();
 
-        if (grounded && currentJumpCooldown <= 0 && Input.GetKey(KeyCode.Space))
-        {
-            Jump();
-        }
+        controlSpeed.LimitSpeed(maxSpeed, speedLimit, limitYAxis);
     }
 
     // if you collide with two "Floor" objects at the same time one won't register
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.layer == 7)
         {
-            rb.linearDamping = 5;
-
-            currentCollisions.Add(collision.gameObject);
             groundCollision = true;
         }
     }
@@ -89,23 +115,20 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            rb.linearDamping = 0;
-
-            currentCollisions.Remove(collision.gameObject);
-
-            if (currentCollisions.Count <= 0)
-                groundCollision = false;
+            groundCollision = false;
         }
     }
 
     private void Move()
     {
-        transform.Translate(
-            new Vector3(
-                speed * Time.deltaTime * Input.GetAxis("Horizontal"),
-                0,
-                speed * Time.deltaTime * Input.GetAxis("Vertical")),
-                Space.Self);
+        Vector3 lastLinearVelocity = rb.linearVelocity;
+
+        Vector3 movement = new Vector3(
+            speed * Input.GetAxis("Horizontal"),
+            lastLinearVelocity.y,
+            speed * Input.GetAxis("Vertical"));
+
+        rb.linearVelocity = Vector3.Project(movement, transform.forward);
     }
 
     private void Jump()
@@ -113,6 +136,6 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
         currentJumpCooldown = jumpCooldown;
 
-        controlSpeed.speedLimit = SpeedLimit.Airborn;
+        speedLimit = SpeedLimit.Airborn;
     }
 }
