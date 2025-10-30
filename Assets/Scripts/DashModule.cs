@@ -17,6 +17,8 @@ public class DashModule : MonoBehaviour
 
     [Header("Special effects")]
     public int dashingFOV = 110;
+    public float FOVincrease = 5;
+    public float FOVdecrease = 1;
 
     void Start()
     {
@@ -29,15 +31,12 @@ public class DashModule : MonoBehaviour
 
     public void Dash()
     {
-        if (Input.GetKeyUp(KeyCode.LeftShift) || currentDashCharge <= 0)
-        {
-            StopDash();
-        }
-
+        playerController.disableMovement = true;
+        Debug.Log("Dashing");
         // camera effects
         if (playerCamera.fieldOfView < dashingFOV)
         {
-            playerCamera.fieldOfView += Time.deltaTime;
+            playerCamera.fieldOfView += FOVincrease;
         }
 
         // calculate direction based on camera (X) and player (Y) rotation
@@ -57,15 +56,16 @@ public class DashModule : MonoBehaviour
         currentDashCharge -= Time.deltaTime;
     }
 
-    private void StopDash()
+    public void StopDash()
     {
-        while (playerCamera.fieldOfView > 90)
+        if (playerCamera.fieldOfView > 90)
         {
-            playerCamera.fieldOfView -= Time.deltaTime;
+            playerCamera.fieldOfView -= FOVdecrease;
         }
 
         rb.useGravity = true;
 
         playerController.speedLimit = SpeedLimit.Airborn;
+        playerController.disableMovement = false;
     }
 }

@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Runtime.Serialization.Formatters;
 using NUnit.Framework.Internal.Filters;
 using Unity.Collections.LowLevel.Unsafe;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +14,13 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public DashModule playerDash;
     public ControlSpeed controlSpeed;
+    public Vector3 spawnpoint;
+
+    [Header("Input")]
+    public bool moveInput = false;
+    public bool jumpInput = false;
+    public bool dashInput = false;
+    public bool resetInput = false;
 
     [Header("Jump control")]
     public float jumpSpeed = 5;
@@ -65,39 +76,50 @@ public class PlayerController : MonoBehaviour
 
         Mathf.Clamp(currentJumpCooldown, 0, jumpCooldown);
         Mathf.Clamp(playerDash.currentDashCharge, 0, playerDash.dashCharge);
+
+        if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            moveInput = true;
+        else
+            moveInput = false;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+            dashInput = true;
+        else
+            dashInput = false;
+
+        if (Input.GetKey(KeyCode.Space))
+            jumpInput = true;
+        else
+            jumpInput = false;
+
+        if (Input.GetKeyDown(KeyCode.R)) 
+            ResetScene();
     }
     
     void FixedUpdate()
     {
         // do some raycasts + parent moving objects it detects
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, 1.1f))
-        {
             groundRay = true;
-            if (hitInfo.collider.tag == "Moving")
-            {
-                transform.parent = hitInfo.transform;
-            }
-        }
         else
-        {
             groundRay = false;
-            transform.parent = null;
-        }
-        
-        if (Input.GetKey(KeyCode.LeftShift))
+
+        if (dashInput && playerDash.currentDashCharge > 0)
         {
             playerDash.Dash();
         }
-
-        if (Input.GetKey(KeyCode.Space))
+        else
         {
-            if (grounded && currentJumpCooldown <= 0)
-            {
-                Jump();
-            }
+            playerDash.StopDash();
         }
 
-        Move();
+        if (jumpInput && grounded && currentJumpCooldown <= 0)
+        {
+            Jump();
+        }
+        
+        if (!disableMovement && moveInput)
+            Move();
 
         controlSpeed.LimitSpeed(maxSpeed, speedLimit, limitYAxis);
     }
@@ -128,7 +150,7 @@ public class PlayerController : MonoBehaviour
             lastLinearVelocity.y,
             speed * Input.GetAxis("Vertical"));
 
-        rb.linearVelocity = Vector3.Project(movement, transform.forward);
+        rb.linearVelocity = Quaternion.Euler(0, transform.eulerAngles.y, 0) * movement;
     }
 
     private void Jump()
@@ -137,5 +159,15 @@ public class PlayerController : MonoBehaviour
         currentJumpCooldown = jumpCooldown;
 
         speedLimit = SpeedLimit.Airborn;
+    }
+
+    private void ResetScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    } 
+
+    public void Respawn()
+    {
+        transform.position = spawnpoint;
     }
 }
