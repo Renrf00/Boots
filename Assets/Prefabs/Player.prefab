@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8785981216839599194}
   - component: {fileID: 501400162442386017}
   - component: {fileID: 382247764473055478}
+  - component: {fileID: 9031902580298730393}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -116,7 +117,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!136 &8785981216839599194
 CapsuleCollider:
@@ -125,7 +126,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751851353045747632}
-  m_Material: {fileID: 13400000, guid: 01e066eda749749f5b9995b5239b143d, type: 2}
+  m_Material: {fileID: 13400000, guid: 0f5fef6db58fb464cab9fe211220ec9e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -155,14 +156,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 6323390421189503719}
   playerDash: {fileID: 382247764473055478}
+  controlSpeed: {fileID: 9031902580298730393}
+  spawnpoint: {x: 0, y: 0, z: 0}
+  moveInput: 0
+  jumpInput: 0
+  dashInput: 0
+  resetInput: 0
   jumpSpeed: 5
   jumpCooldown: 0.4
   currentJumpCooldown: 0
+  grounded: 0
   groundCollision: 0
   groundRay: 0
-  currentCollisions: []
   speed: 7
+  speedLimit: 0
   maxSpeed: 7
+  limitYAxis: 0
+  disableMovement: 0
   dashModule: 1
 --- !u!114 &382247764473055478
 MonoBehaviour:
@@ -186,6 +196,21 @@ MonoBehaviour:
   currentDashCharge: 0
   speed: 10
   dashingFOV: 110
+  FOVincrease: 5
+  FOVdecrease: 1
+--- !u!114 &9031902580298730393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751851353045747632}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a7f92dc6090494fbfd925f63fca3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 6323390421189503719}
 --- !u!1 &2730832888795048004
 GameObject:
   m_ObjectHideFlags: 0

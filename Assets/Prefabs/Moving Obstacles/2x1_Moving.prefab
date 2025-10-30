@@ -353,7 +353,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3477670417032191250}
+  - component: {fileID: 8515961232171437698}
   - component: {fileID: 2825810375967650814}
+  - component: {fileID: 347409429320206499}
   - component: {fileID: -918092080837684229}
   m_Layer: 7
   m_Name: 2x1_Moving
@@ -381,6 +383,33 @@ Transform:
   - {fileID: 2526190651802523454}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &8515961232171437698
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6587692025923238128}
+  serializedVersion: 4
+  m_Mass: 1000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &2825810375967650814
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -402,6 +431,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!65 &347409429320206499
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6587692025923238128}
+  m_Material: {fileID: 13400000, guid: d0c10e309bf7f466c98a4c9be4f6255c, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9, y: 1, z: 1.9}
+  m_Center: {x: 0, y: 0.51, z: 0}
 --- !u!114 &-918092080837684229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,6 +464,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f025c7c24704bb69b9b7c25975ed82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   MovementAxis: 0
   distanceToEnd: 4
   speed: 1
+  startingPositionInAxis: 0
+  endingPositionInAxis: 0
+  positionInAxis: 0
+  gizmosColor: {r: 255, g: 255, b: 0, a: 150}
