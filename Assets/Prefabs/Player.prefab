@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8785981216839599194}
   - component: {fileID: 501400162442386017}
   - component: {fileID: 382247764473055478}
-  - component: {fileID: 9031902580298730393}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -154,10 +153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e919ab19ea641aaa873728e26fab61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 6323390421189503719}
-  playerDash: {fileID: 382247764473055478}
-  controlSpeed: {fileID: 9031902580298730393}
-  spawnpoint: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
+  playerDash: {fileID: 0}
+  controlSpeed: {fileID: 0}
+  spawnpoint: {fileID: 0}
   moveInput: 0
   jumpInput: 0
   dashInput: 0
@@ -186,11 +185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6207fe3e3c640869692abc7982c13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1626542495004978774}
-  rb: {fileID: 6323390421189503719}
-  playerController: {fileID: 501400162442386017}
-  playerTransform: {fileID: 491932264928516532}
-  cameraTransform: {fileID: 4651319201889002484}
+  rb: {fileID: 0}
+  playerController: {fileID: 0}
+  playerCamera: {fileID: 0}
   direction: {x: 0, y: 0, z: 1}
   dashCharge: 0.5
   currentDashCharge: 0
@@ -198,19 +195,6 @@ MonoBehaviour:
   dashingFOV: 110
   FOVincrease: 5
   FOVdecrease: 1
---- !u!114 &9031902580298730393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751851353045747632}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80a7f92dc6090494fbfd925f63fca3b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 6323390421189503719}
 --- !u!1 &2730832888795048004
 GameObject:
   m_ObjectHideFlags: 0
