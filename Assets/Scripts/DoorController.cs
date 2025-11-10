@@ -5,9 +5,14 @@ public class DoorController : MonoBehaviour
     public GameObject player;
     public Material door;
 
-    public bool doorUnlocked = false;
+    private bool doorUnlocked = false;
     public float speed = 1;
 
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        SetDoorUnlocked(false);
+    }
     void Update()
     {
         if ((player.transform.position - transform.parent.position).magnitude < 8 && doorUnlocked)

@@ -18,9 +18,9 @@ public class MovingObject : MonoBehaviour
     public float distanceToEnd;
     public float speed = 1f;
 
-    [HideInInspector] public float startingPositionInAxis;
-    [HideInInspector] public float endingPositionInAxis;
-    [HideInInspector] public float positionInAxis;
+    public float startingPositionInAxis;
+    public float endingPositionInAxis;
+    public float positionInAxis;
 
 
     [Header("Gizmos")]
@@ -66,10 +66,13 @@ public class MovingObject : MonoBehaviour
         {
             direction = SetAxisValue(direction, 1, MovementAxis);
         }
-
-        if (positionInAxis >= Mathf.Max(startingPositionInAxis, endingPositionInAxis))
+        else if (positionInAxis >= Mathf.Max(startingPositionInAxis, endingPositionInAxis))
         {
             direction = SetAxisValue(direction, -1, MovementAxis);
+        }
+        else if (rb.linearVelocity == Vector3.zero)
+        {
+            direction *= -1;
         }
         
         rb.linearVelocity = direction * speed;
@@ -114,7 +117,8 @@ public class MovingObject : MonoBehaviour
 
     private Vector3 SetAxisValue(Vector3 vector, float value, MovementAxis movementAxis)
     {
-        switch (MovementAxis)
+        Debug.Log(vector + " , " + value + " , " + movementAxis);
+        switch (movementAxis)
         {
             case MovementAxis.rightLeft:
                 vector = new Vector3(value, vector.y, vector.z);
