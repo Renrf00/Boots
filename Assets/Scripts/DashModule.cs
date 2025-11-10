@@ -3,11 +3,9 @@ using UnityEngine;
 public class DashModule : MonoBehaviour
 {
     [Header("References")]
-    public Camera playerCamera;
     public Rigidbody rb;
     public PlayerController playerController;
-    public Transform playerTransform;
-    public Transform cameraTransform;
+    public Camera playerCamera;
 
     [Header("Dash")]
     public Vector3 direction = Vector3.forward;
@@ -24,7 +22,7 @@ public class DashModule : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
-        playerTransform = GetComponent<Transform>();
+        playerCamera = GetComponentInChildren<Camera>();
 
         currentDashCharge = dashCharge;
     }
@@ -32,7 +30,7 @@ public class DashModule : MonoBehaviour
     public void Dash()
     {
         playerController.disableMovement = true;
-        Debug.Log("Dashing");
+
         // camera effects
         if (playerCamera.fieldOfView < dashingFOV)
         {
@@ -41,8 +39,8 @@ public class DashModule : MonoBehaviour
 
         // calculate direction based on camera (X) and player (Y) rotation
         direction = Quaternion.Euler(
-            cameraTransform.rotation.eulerAngles.x,
-            playerTransform.rotation.eulerAngles.y,
+            playerCamera.transform.rotation.eulerAngles.x,
+            transform.rotation.eulerAngles.y,
             0
         ) * Vector3.forward;
 

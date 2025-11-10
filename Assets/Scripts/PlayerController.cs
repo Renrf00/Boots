@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public DashModule playerDash;
     public ControlSpeed controlSpeed;
-    public Vector3 spawnpoint;
+    public Transform spawnpoint;
 
     [Header("Input")]
     public bool moveInput = false;
@@ -42,8 +42,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Constrains")]
     public bool disableMovement = false;
-    // public bool disableJump = false;
-    // public bool disableDash = true;
 
     [Header("Modules")]
     public bool dashModule = true;
@@ -53,6 +51,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerDash = GetComponent<DashModule>();
         controlSpeed = GetComponent<ControlSpeed>();
+        spawnpoint = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>();
 
         if (dashModule)
         {
@@ -168,6 +167,6 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
-        transform.position = spawnpoint;
+        transform.position = spawnpoint.position;
     }
 }

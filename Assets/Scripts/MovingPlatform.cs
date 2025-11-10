@@ -117,7 +117,6 @@ public class MovingObject : MonoBehaviour
 
     private Vector3 SetAxisValue(Vector3 vector, float value, MovementAxis movementAxis)
     {
-        Debug.Log(vector + " , " + value + " , " + movementAxis);
         switch (movementAxis)
         {
             case MovementAxis.rightLeft:
