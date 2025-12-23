@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Runtime.Serialization.Formatters;
-using NUnit.Framework.Internal.Filters;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +6,6 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     public Rigidbody rb;
     public DashModule playerDash;
-    public ControlSpeed controlSpeed;
     public Transform spawnpoint;
 
     [Header("Input")]
@@ -50,7 +42,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerDash = GetComponent<DashModule>();
-        controlSpeed = GetComponent<ControlSpeed>();
         spawnpoint = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>();
 
         if (dashModule)
@@ -119,8 +110,6 @@ public class PlayerController : MonoBehaviour
         
         if (!disableMovement && moveInput)
             Move();
-
-        controlSpeed.LimitSpeed(maxSpeed, speedLimit, limitYAxis);
     }
 
     // if you collide with two "Floor" objects at the same time one won't register
