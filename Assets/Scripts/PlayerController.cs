@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,31 +11,30 @@ public class PlayerController : MonoBehaviour
     public bool moveInput = false;
     public bool jumpInput = false;
     public bool dashInput = false;
-    public bool resetInput = false;
+    public bool respawnInput = false;
 
     [Header("Jump control")]
     public float jumpSpeed = 5;
     public float jumpCooldown = 0.4f;
     public float currentJumpCooldown;
     public bool grounded = false;
-    // did this so the player can't jump by touching the side of a "Floor" object (collision) or jump before touching the ground (Raycast)
-    [HideInInspector] public bool groundCollision = false;
-    [HideInInspector] public bool groundRay = false;
-    // you could loose the ability to jump if you were on the ground and left the collision of another "Floor" obstacle so I created a list of the current collisions
+    public bool groundCollision = false;
+    public bool groundRay = false;
 
     [Header("Movement control")]
     public float speed = 5;
 
-    [Header("Speed control")]
-    public SpeedLimit speedLimit = SpeedLimit.Grounded;
-    public float maxSpeed = 7;
-    public bool limitYAxis = false;
+    // [Header("Speed control")]
+    // public SpeedLimit speedLimit = SpeedLimit.Grounded;
+    // public float maxSpeed = 7;
+    // public bool limitYAxis = false;
 
     [Header("Constrains")]
+    public bool spawnInStart = true;
     public bool disableMovement = false;
 
-    [Header("Modules")]
-    public bool dashModule = true;
+    // [Header("Modules")]
+    // public bool dashModule = true;
 
     void Start()
     {
@@ -44,10 +42,14 @@ public class PlayerController : MonoBehaviour
         playerDash = GetComponent<DashModule>();
         spawnpoint = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>();
 
-        if (dashModule)
+        if (spawnInStart)
         {
-            playerDash.enabled = true;
+            Respawn();
         }
+        // if (dashModule)
+        // {
+        //     playerDash.enabled = true;
+        // }
     }
 
     void Update()
@@ -57,7 +59,6 @@ public class PlayerController : MonoBehaviour
         else
             grounded = false;
 
-        // lower jump cooldown also here so you don't have a lower cooldown
         if (currentJumpCooldown > 0)
             currentJumpCooldown -= Time.deltaTime;
 
@@ -82,10 +83,10 @@ public class PlayerController : MonoBehaviour
         else
             jumpInput = false;
 
-        if (Input.GetKeyDown(KeyCode.R)) 
-            ResetScene();
+        if (Input.GetKeyDown(KeyCode.R))
+            respawnInput = true;
     }
-    
+
     void FixedUpdate()
     {
         // do some raycasts + parent moving objects it detects
@@ -93,6 +94,15 @@ public class PlayerController : MonoBehaviour
             groundRay = true;
         else
             groundRay = false;
+
+        if (respawnInput)
+        {
+            moveInput = false;
+            jumpInput = false;
+            dashInput = false;
+
+            Respawn();
+        }
 
         if (dashInput && playerDash.currentDashCharge > 0)
         {
@@ -107,12 +117,11 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-        
+
         if (!disableMovement && moveInput)
             Move();
     }
 
-    // if you collide with two "Floor" objects at the same time one won't register
     void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.layer == 7)
@@ -146,16 +155,18 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
         currentJumpCooldown = jumpCooldown;
 
-        speedLimit = SpeedLimit.Airborn;
+        // speedLimit = SpeedLimit.Airborn;
     }
 
-    private void ResetScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    } 
+    // private void ResetScene()
+    // {
+    //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    // }
 
     public void Respawn()
     {
+        rb.linearVelocity = Vector3.zero;
         transform.position = spawnpoint.position;
+        respawnInput = false;
     }
 }

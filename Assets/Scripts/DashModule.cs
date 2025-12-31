@@ -31,7 +31,6 @@ public class DashModule : MonoBehaviour
     {
         playerController.disableMovement = true;
 
-        // camera effects
         if (playerCamera.fieldOfView < dashingFOV)
         {
             playerCamera.fieldOfView += FOVincrease;
@@ -44,12 +43,11 @@ public class DashModule : MonoBehaviour
             0
         ) * Vector3.forward;
 
-        // rb.AddForce(direction * speed, ForceMode.Impulse);
         rb.linearVelocity = direction * speed;
 
         rb.useGravity = false;
 
-        playerController.speedLimit = SpeedLimit.Dash;
+        // playerController.speedLimit = SpeedLimit.Dash;
 
         currentDashCharge -= Time.deltaTime;
     }
@@ -63,7 +61,7 @@ public class DashModule : MonoBehaviour
 
         rb.useGravity = true;
 
-        playerController.speedLimit = SpeedLimit.Airborn;
+        // playerController.speedLimit = SpeedLimit.Airborn;
         playerController.disableMovement = false;
     }
 }

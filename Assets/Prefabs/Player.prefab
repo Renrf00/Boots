@@ -159,7 +159,7 @@ MonoBehaviour:
   moveInput: 0
   jumpInput: 0
   dashInput: 0
-  resetInput: 0
+  respawnInput: 0
   jumpSpeed: 5
   jumpCooldown: 0.4
   currentJumpCooldown: 0
@@ -167,11 +167,8 @@ MonoBehaviour:
   groundCollision: 0
   groundRay: 0
   speed: 7
-  speedLimit: 0
-  maxSpeed: 7
-  limitYAxis: 0
+  spawnInStart: 1
   disableMovement: 0
-  dashModule: 1
 --- !u!114 &382247764473055478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +342,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 491932264928516532}
-  rotationSpeed: 1000
+  sensibility: {fileID: 11400000, guid: 3fd3d2cb992a341d89d2ba2a94885992, type: 2}
   rotationXHighClamp: 90
   rotationXLowClamp: -60

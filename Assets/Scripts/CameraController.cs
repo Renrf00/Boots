@@ -6,14 +6,14 @@ public class CameraController : MonoBehaviour
     public Transform player;
 
     [Header("Rotation")]
-    public float rotationSpeed;
+    public ScriptableNumber sensibility;
     public float rotationXHighClamp = 90;
     public float rotationXLowClamp = -60;
     private float rotationX;
     private float rotationY;
 
     void Start()
-    {   
+    {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -21,9 +21,9 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // rotate based on mouse input
-        rotationX += -rotationSpeed * Time.deltaTime * Input.GetAxis("Mouse Y");
-        rotationY += rotationSpeed * Time.deltaTime * Input.GetAxis("Mouse X");
-        
+        rotationX += -sensibility.number * Time.deltaTime * Input.GetAxis("Mouse Y");
+        rotationY += sensibility.number * Time.deltaTime * Input.GetAxis("Mouse X");
+
         rotationX = Mathf.Clamp(rotationX, -rotationXHighClamp, -rotationXLowClamp);
 
         // rotate player character's Y axis

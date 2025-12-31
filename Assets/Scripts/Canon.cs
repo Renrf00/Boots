@@ -1,75 +1,61 @@
+using System.Collections;
 using UnityEngine;
 
 public class Canon : MonoBehaviour
 {
-[Header("References")]
-public Rigidbody projectile;
+    [Header("References")]
+    public Projectile projectile;
+    public Transform canonMouth;
 
-[Header("Canon parameters")]
-[Min(1)] public int nBullets;
-[Min(0)] public float speed;
-[Min(1)] public float mass;
-[Range(0.1f, 1)] public float bulletInterval;
-[Min(1)] public float burstInterval;
-private bool shootingBurst;
-private float currentBulletInterval;
-private float currentBurstInterval;
+    [Header("Canon parameters")]
+    [Min(1)] public int nBullets = 1;
+    [Min(0)] public float startDelay;
+    [Range(0, 1)] public float bulletInterval;
+    [Range(0, 10)] public float burstInterval;
 
-    void FixedUpdate()
+    [Header("Bullet parameters")]
+    [Min(0.1f)] public float bulletLifetime;
+    [Min(0)] public float speed;
+    public bool gravity = true;
+
+    void Start()
     {
-        if (nBullets > 1)
-        {
-            BurstFire(nBullets);
-        } 
-        else
-        {
-            SingleFire();
-        }
+        StartCoroutine(BurstFire(nBullets));
     }
 
-    private void SingleFire()
+    private IEnumerator BurstFire(int nBullets)
     {
-        if (currentBurstInterval <= 0)
+        float nextBurstTime = Time.time + startDelay;
+
+        while (true)
         {
-            Rigidbody projectileInstance;
-
-            currentBurstInterval = burstInterval;
-            
-            projectileInstance  = Instantiate(projectile, transform);
-
-            projectileInstance.mass = mass;
-            projectileInstance.AddForce(Vector3.up * speed, ForceMode.VelocityChange);
-        }
-
-        currentBurstInterval -= Time.deltaTime;
-    }
-
-    private void BurstFire(int nBullets)
-    {
-        if (currentBurstInterval <= 0){
-            shootingBurst = true;
-            currentBurstInterval = burstInterval;
+            yield return new WaitUntil(() => Time.time >= nextBurstTime);
 
             for (int i = 0; i < nBullets; i++)
             {
-                if (currentBulletInterval <= 0)
+                ShootBullet();
+
+                if (i != nBullets - 1)
                 {
-                    Rigidbody projectileInstance;
-
-                    currentBulletInterval = bulletInterval;
-                    
-                    projectileInstance  = Instantiate(projectile, transform);
-
-                    projectileInstance.mass = mass;
-                    projectileInstance.AddForce(Vector3.up * speed, ForceMode.VelocityChange); // find a way to shoot in the same direction as the canon
+                    yield return new WaitForSeconds(bulletInterval);
                 }
-                currentBulletInterval -= Time.deltaTime;
             }
-            shootingBurst = false;
+            nextBurstTime += burstInterval;
         }
-        if (!shootingBurst)
+    }
+
+    private void ShootBullet()
+    {
+        Projectile projectileInstance;
+        Vector3 direction = canonMouth.rotation * Vector3.up;
+
+        projectileInstance = Instantiate(projectile, canonMouth.position, canonMouth.rotation);
+
+        if (projectileInstance)
         {
-            currentBurstInterval -= Time.deltaTime;
+            projectileInstance.gameObject.GetComponent<Rigidbody>().useGravity = gravity;
+            projectileInstance.gameObject.GetComponent<Rigidbody>().AddForce(direction * speed, ForceMode.VelocityChange);
+            projectileInstance.lifetime = bulletLifetime;
         }
     }
 }
