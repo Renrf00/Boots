@@ -1,11 +1,13 @@
-using System;
+using System.Linq;
+using FMODUnity;
 using UnityEngine;
 
 public class CardPickup : MonoBehaviour
 {
     [Header("References")]
-    public DoorController doorController;
-    
+    private GameManager gm;
+    private DoorController doorController;
+    public StudioEventEmitter FMODPickUp;
 
     void Start()
     {
@@ -14,8 +16,22 @@ public class CardPickup : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        gm = FindFirstObjectByType<GameManager>();
+
+        if (gm.GetRoomNumber() == -1)
+            return;
+
+        if (other.tag == "Player")
         {
+            gm.levelStates.ElementAt(gm.GetRoomNumber()).complete = true;
+
+            if (gm.levelStates.ElementAt(gm.GetRoomNumber()).timeSeconds > Time.timeSinceLevelLoad - gm.subtractToTimer || gm.levelStates.ElementAt(gm.GetRoomNumber()).timeSeconds == 0)
+            {
+                gm.levelStates.ElementAt(gm.GetRoomNumber()).timeSeconds = Time.timeSinceLevelLoad - gm.subtractToTimer;
+                gm.subtractToTimer = 0;
+            }
+
+            FMODPickUp.Play();
             Destroy(gameObject);
             doorController.SetDoorUnlocked(true);
         }

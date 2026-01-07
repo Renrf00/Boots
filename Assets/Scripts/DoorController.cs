@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     public Material door;
 
     private bool doorUnlocked = false;
-    public float speed = 1;
+    public float doorSpeed = 1;
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class DoorController : MonoBehaviour
         if ((player.transform.position - transform.parent.position).magnitude < 8 && doorUnlocked)
         {
             OpenDoor();
-        } 
+        }
         else
         {
             CloseDoor();
@@ -28,25 +28,26 @@ public class DoorController : MonoBehaviour
     {
         if (transform.position.y > transform.parent.position.y)
         {
-            transform.Translate(Vector3.down * speed, transform.parent);
+            transform.Translate(Vector3.down * doorSpeed, transform.parent);
         }
     }
     public void OpenDoor()
     {
         if (transform.position.y < transform.parent.position.y + 3.99f)
         {
-            transform.Translate(Vector3.up * speed, transform.parent);
+            transform.Translate(Vector3.up * doorSpeed, transform.parent);
         }
     }
 
     public void SetDoorUnlocked(bool isUnlocked)
     {
         doorUnlocked = isUnlocked;
-        
+
         if (doorUnlocked)
         {
             SetEmissionColor(Color.green);
-        } else
+        }
+        else
         {
             SetEmissionColor(Color.red);
         }

@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 8785981216839599194}
   - component: {fileID: 501400162442386017}
   - component: {fileID: 382247764473055478}
+  - component: {fileID: 3695125713651284589}
+  - component: {fileID: 4000108596932858355}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -156,6 +158,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   playerDash: {fileID: 0}
   spawnpoint: {fileID: 0}
+  FMODLand: {fileID: 3695125713651284589}
+  FMODDash: {fileID: 4000108596932858355}
   moveInput: 0
   jumpInput: 0
   dashInput: 0
@@ -168,7 +172,8 @@ MonoBehaviour:
   groundRay: 0
   speed: 7
   spawnInStart: 1
-  disableMovement: 0
+  disableWalking: 0
+  disableInput: 0
 --- !u!114 &382247764473055478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +196,68 @@ MonoBehaviour:
   dashingFOV: 110
   FOVincrease: 5
   FOVdecrease: 1
+--- !u!114 &3695125713651284589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751851353045747632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1732114325
+      Data2: 1291294359
+      Data3: -271898219
+      Data4: 601271718
+    Path: event:/Land
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &4000108596932858355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751851353045747632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -866836549
+      Data2: 1131340302
+      Data3: -1517828707
+      Data4: 1984881120
+    Path: event:/Dash
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &2730832888795048004
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +271,7 @@ GameObject:
   - component: {fileID: 3171102245079814471}
   - component: {fileID: 6044504017970138005}
   - component: {fileID: 3356214097620001100}
+  - component: {fileID: 2428677202772174808}
   m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -345,3 +413,17 @@ MonoBehaviour:
   sensibility: {fileID: 11400000, guid: 3fd3d2cb992a341d89d2ba2a94885992, type: 2}
   rotationXHighClamp: 90
   rotationXLowClamp: -60
+--- !u!114 &2428677202772174808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2730832888795048004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}

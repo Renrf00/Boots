@@ -1,40 +1,40 @@
+using FMODUnity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
-    public Rigidbody rb;
-    public DashModule playerDash;
-    public Transform spawnpoint;
+    private Rigidbody rb;
+    private DashModule playerDash;
+    private Transform spawnpoint;
+    public StudioEventEmitter FMODLand;
+    public StudioEventEmitter FMODDash;
 
     [Header("Input")]
-    public bool moveInput = false;
-    public bool jumpInput = false;
-    public bool dashInput = false;
-    public bool respawnInput = false;
+    private bool moveInput = false;
+    private bool jumpInput = false;
+    private bool dashInput = false;
+    private bool firstDash = true;
+    private bool respawnInput = false;
 
     [Header("Jump control")]
     public float jumpSpeed = 5;
     public float jumpCooldown = 0.4f;
-    public float currentJumpCooldown;
-    public bool grounded = false;
-    public bool groundCollision = false;
-    public bool groundRay = false;
+
+    private float currentJumpCooldown;
+    private bool grounded = false;
+    private bool firstGrounded = true;
+    private bool groundCollision = false;
+    private bool groundRay = false;
 
     [Header("Movement control")]
     public float speed = 5;
 
-    // [Header("Speed control")]
-    // public SpeedLimit speedLimit = SpeedLimit.Grounded;
-    // public float maxSpeed = 7;
-    // public bool limitYAxis = false;
-
     [Header("Constrains")]
     public bool spawnInStart = true;
-    public bool disableMovement = false;
-
-    // [Header("Modules")]
-    // public bool dashModule = true;
+    [HideInInspector] public bool disableWalking = false;
+    [HideInInspector] public bool disableInput = false;
 
     void Start()
     {
@@ -42,31 +42,38 @@ public class PlayerController : MonoBehaviour
         playerDash = GetComponent<DashModule>();
         spawnpoint = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>();
 
-        if (spawnInStart)
-        {
-            Respawn();
-        }
-        // if (dashModule)
-        // {
-        //     playerDash.enabled = true;
-        // }
+        respawnInput = spawnInStart;
+        GameManager.LockCursor(true);
     }
 
     void Update()
     {
         if (groundRay && groundCollision)
+        {
+            if (firstGrounded)
+            {
+                FMODLand.Play();
+                firstGrounded = false;
+            }
             grounded = true;
+        }
         else
+        {
             grounded = false;
+            firstGrounded = true;
+        }
 
         if (currentJumpCooldown > 0)
             currentJumpCooldown -= Time.deltaTime;
 
-        if (grounded && playerDash.currentDashCharge < playerDash.dashCharge)
+        if (grounded && playerDash.currentDashCharge < playerDash.maxDashCharge)
             playerDash.currentDashCharge += Time.deltaTime;
 
         Mathf.Clamp(currentJumpCooldown, 0, jumpCooldown);
-        Mathf.Clamp(playerDash.currentDashCharge, 0, playerDash.dashCharge);
+        Mathf.Clamp(playerDash.currentDashCharge, 0, playerDash.maxDashCharge);
+
+        if (disableInput)
+            return;
 
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
             moveInput = true;
@@ -74,9 +81,19 @@ public class PlayerController : MonoBehaviour
             moveInput = false;
 
         if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (firstDash)
+            {
+                FMODDash.Play();
+                firstDash = false;
+            }
             dashInput = true;
+        }
         else
+        {
             dashInput = false;
+            firstDash = true;
+        }
 
         if (Input.GetKey(KeyCode.Space))
             jumpInput = true;
@@ -118,7 +135,7 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        if (!disableMovement && moveInput)
+        if (!disableWalking && moveInput)
             Move();
     }
 
@@ -158,15 +175,20 @@ public class PlayerController : MonoBehaviour
         // speedLimit = SpeedLimit.Airborn;
     }
 
-    // private void ResetScene()
-    // {
-    //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    // }
+    public void ResetScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
     public void Respawn()
     {
         rb.linearVelocity = Vector3.zero;
         transform.position = spawnpoint.position;
         respawnInput = false;
+    }
+
+    public void DisableCameraMove(bool disable)
+    {
+        FindFirstObjectByType<CameraController>().enabled = !disable;
     }
 }

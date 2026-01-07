@@ -1,4 +1,5 @@
 using System.Collections;
+using FMODUnity;
 using UnityEngine;
 
 public class Canon : MonoBehaviour
@@ -6,6 +7,7 @@ public class Canon : MonoBehaviour
     [Header("References")]
     public Projectile projectile;
     public Transform canonMouth;
+    public StudioEventEmitter FMODShoot;
 
     [Header("Canon parameters")]
     [Min(1)] public int nBullets = 1;
@@ -15,10 +17,10 @@ public class Canon : MonoBehaviour
 
     [Header("Bullet parameters")]
     [Min(0.1f)] public float bulletLifetime;
-    [Min(0)] public float speed;
-    public bool gravity = true;
+    [Min(0)] public float bulletSpeed;
+    public bool bulletGravity = true;
 
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(BurstFire(nBullets));
     }
@@ -53,9 +55,10 @@ public class Canon : MonoBehaviour
 
         if (projectileInstance)
         {
-            projectileInstance.gameObject.GetComponent<Rigidbody>().useGravity = gravity;
-            projectileInstance.gameObject.GetComponent<Rigidbody>().AddForce(direction * speed, ForceMode.VelocityChange);
+            projectileInstance.gameObject.GetComponent<Rigidbody>().useGravity = bulletGravity;
+            projectileInstance.gameObject.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.VelocityChange);
             projectileInstance.lifetime = bulletLifetime;
         }
+        FMODShoot.Play();
     }
 }

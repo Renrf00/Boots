@@ -3,20 +3,20 @@ using UnityEngine;
 public class DashModule : MonoBehaviour
 {
     [Header("References")]
-    public Rigidbody rb;
-    public PlayerController playerController;
-    public Camera playerCamera;
+    private Rigidbody rb;
+    private PlayerController playerController;
+    private Camera playerCamera;
 
     [Header("Dash")]
-    public Vector3 direction = Vector3.forward;
-    public float dashCharge = 0.5f;
-    public float currentDashCharge;
-    public float speed = 50;
+    private Vector3 direction = Vector3.forward;
+    public float maxDashCharge = 0.5f;
+    [HideInInspector] public float currentDashCharge;
+    public float dashSpeed = 50;
 
     [Header("Special effects")]
     public int dashingFOV = 110;
-    public float FOVincrease = 5;
-    public float FOVdecrease = 1;
+    public float FOVIncreaseSpeed = 5;
+    public float FOVDecreaseSpeed = 1;
 
     void Start()
     {
@@ -24,16 +24,16 @@ public class DashModule : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         playerCamera = GetComponentInChildren<Camera>();
 
-        currentDashCharge = dashCharge;
+        currentDashCharge = maxDashCharge;
     }
 
     public void Dash()
     {
-        playerController.disableMovement = true;
+        playerController.disableWalking = true;
 
         if (playerCamera.fieldOfView < dashingFOV)
         {
-            playerCamera.fieldOfView += FOVincrease;
+            playerCamera.fieldOfView += FOVIncreaseSpeed;
         }
 
         // calculate direction based on camera (X) and player (Y) rotation
@@ -43,7 +43,7 @@ public class DashModule : MonoBehaviour
             0
         ) * Vector3.forward;
 
-        rb.linearVelocity = direction * speed;
+        rb.linearVelocity = direction * dashSpeed;
 
         rb.useGravity = false;
 
@@ -56,12 +56,12 @@ public class DashModule : MonoBehaviour
     {
         if (playerCamera.fieldOfView > 90)
         {
-            playerCamera.fieldOfView -= FOVdecrease;
+            playerCamera.fieldOfView -= FOVDecreaseSpeed;
         }
 
         rb.useGravity = true;
 
         // playerController.speedLimit = SpeedLimit.Airborn;
-        playerController.disableMovement = false;
+        playerController.disableWalking = false;
     }
 }

@@ -1,0 +1,13 @@
+﻿title: Start
+---
+<<if !CompletedRoom()>>
+    <<DisablePlayerControl true>>
+    Scientist: Welcome to room 0 of the "Boots testing program"!
+    Scientist: To complete each room, you need to pick up the keycard at the end of the room, which will open the door behind that will take you to the next room.
+    Scientist: Off you go!
+
+    Tips: LShift to dash, R to respawn, ESC to open the menu
+    <<DisablePlayerControl false>>
+    <<SetTimerDelay>>
+<<endif>>
+===

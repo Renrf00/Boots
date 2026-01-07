@@ -10,7 +10,7 @@ public enum MovementAxis
 public class MovingObject : MonoBehaviour
 {
     [Header("References")]
-    public Rigidbody rb;
+    private Rigidbody rb;
 
     [Header("Platform Movement")]
     public MovementAxis MovementAxis;
@@ -18,9 +18,9 @@ public class MovingObject : MonoBehaviour
     public float distanceToEnd;
     public float speed = 1f;
 
-    public float startingPositionInAxis;
-    public float endingPositionInAxis;
-    public float positionInAxis;
+    private float startingPositionInAxis;
+    private float endingPositionInAxis;
+    private float positionInAxis;
 
 
     [Header("Gizmos")]
@@ -74,7 +74,7 @@ public class MovingObject : MonoBehaviour
         {
             direction *= -1;
         }
-        
+
         rb.linearVelocity = direction * speed;
     }
 

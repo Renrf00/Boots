@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public PlayerController player;
     public string checkTag;
-    [Range(1, 30)]public float lifetime = 10;
+    [Range(1, 30)] public float lifetime = 10;
     public int minY = -10;
     private float currentLifetime;
 
     void Start()
     {
-        player = FindFirstObjectByType<PlayerController>().GetComponent<PlayerController>();
         currentLifetime = lifetime;
     }
     void Update()
@@ -28,12 +26,21 @@ public class Projectile : MonoBehaviour
         {
             if (checkTag == "Player")
             {
-                player.Respawn();
-            } 
+                collision.gameObject.GetComponent<PlayerController>().Respawn();
+            }
             else
             {
                 Destroy(collision.gameObject);
             }
+        }
+    }
+
+    public void DestroyAllBullets()
+    {
+        Projectile[] bullets = FindObjectsByType<Projectile>(0);
+        foreach (Projectile bullet in bullets)
+        {
+            Destroy(bullet.gameObject);
         }
     }
 }

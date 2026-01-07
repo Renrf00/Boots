@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 public class UIButtons : MonoBehaviour
 {
-    public Animator canvasAnimation;
+    public Animator UIAnimation;
     public string idleState;
     public bool inMenu;
 
@@ -12,15 +13,34 @@ public class UIButtons : MonoBehaviour
         {
             if (inMenu)
             {
-                canvasAnimation.Play(idleState);
+                GameManager.LockCursor(idleState == "LevelSelect" ? false : true);
+                try
+                {
+                    FindFirstObjectByType<PlayerController>().DisableCameraMove(false);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("No PlayerController found");
+                }
+
+                UIAnimation.Play(idleState);
                 inMenu = false;
             }
             else
             {
-                canvasAnimation.Play("Menu");
+                GameManager.LockCursor(false);
+                try
+                {
+                    FindFirstObjectByType<PlayerController>().DisableCameraMove(true);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("No PlayerController found");
+                }
+
+                UIAnimation.Play("Menu");
                 inMenu = true;
             }
         }
-
     }
 }

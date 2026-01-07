@@ -12,12 +12,6 @@ public class CameraController : MonoBehaviour
     private float rotationX;
     private float rotationY;
 
-    void Start()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
     void Update()
     {
         // rotate based on mouse input

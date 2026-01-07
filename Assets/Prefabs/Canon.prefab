@@ -206,6 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8706580497278137270}
   - component: {fileID: 5927355342810484664}
+  - component: {fileID: 4917778180144743191}
   m_Layer: 0
   m_Name: Canon
   m_TagString: Untagged
@@ -244,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 7389573421407118222, guid: f37e7209186c149da8eaeda616a23687, type: 3}
   canonMouth: {fileID: 612771163207841242}
+  FMODShoot: {fileID: 4917778180144743191}
   nBullets: 1
   startDelay: 0
   bulletInterval: 0.1
@@ -251,3 +253,34 @@ MonoBehaviour:
   bulletLifetime: 5
   speed: 15
   gravity: 1
+--- !u!114 &4917778180144743191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5776198355621324274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 698754263
+      Data2: 1184016422
+      Data3: -1709695357
+      Data4: -1973277327
+    Path: event:/Canon
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4109548527238679482}
   - component: {fileID: 7299799127757524227}
   - component: {fileID: 874828373902122656}
+  - component: {fileID: -6360505368268738407}
   m_Layer: 0
   m_Name: CardParent
   m_TagString: Untagged
@@ -67,7 +68,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f2f0753031442f1a55eba9e1b40d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 0}
   doorController: {fileID: 0}
+  FMODPickUp: {fileID: -6360505368268738407}
+--- !u!114 &-6360505368268738407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395823666397482733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1911015803
+      Data2: 1094497781
+      Data3: 1929258420
+      Data4: 1337521859
+    Path: event:/PickUp
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &544175236247270020
 PrefabInstance:
   m_ObjectHideFlags: 0
