@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{62ff8821-a052-4f9b-b161-1be2f9d5ce66}">
+		<property name="assetPath">
+			<value>Pop__beezlefm.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.17886621315192744</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{053b2a43-7618-44f1-9a5e-bcf3b27c08fa}</destination>
+		</relationship>
+	</object>
+</objects>

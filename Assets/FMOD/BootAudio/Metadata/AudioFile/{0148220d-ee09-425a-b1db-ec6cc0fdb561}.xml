@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{0148220d-ee09-425a-b1db-ec6cc0fdb561}">
+		<property name="assetPath">
+			<value>Canon__claytonitaw.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>4.0323356009070297</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{053b2a43-7618-44f1-9a5e-bcf3b27c08fa}</destination>
+		</relationship>
+	</object>
+</objects>
