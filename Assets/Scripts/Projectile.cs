@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public string checkTag;
-    [Range(1, 30)] public float lifetime = 10;
+    public string TagToCollide;
+    [Min(1)] public float lifetime = 10;
     public int minY = -10;
     private float currentLifetime;
 
@@ -22,9 +22,9 @@ public class Projectile : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == checkTag)
+        if (collision.gameObject.tag == TagToCollide)
         {
-            if (checkTag == "Player")
+            if (TagToCollide == "Player")
             {
                 collision.gameObject.GetComponent<PlayerController>().Respawn();
             }
@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void DestroyAllBullets()
+    public void DestroyExistingBullets()
     {
         Projectile[] bullets = FindObjectsByType<Projectile>(0);
         foreach (Projectile bullet in bullets)
