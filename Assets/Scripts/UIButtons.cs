@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class UIButtons : MonoBehaviour
 {
-    public Animator UIAnimation;
-    public string idleState;
-    public bool inMenu;
+    [SerializeField] private Animator UIAnimation;
+    [SerializeField] private string idleState;
+    [SerializeField] private bool inMenu;
 
     void Update()
     {

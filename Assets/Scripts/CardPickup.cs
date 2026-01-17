@@ -7,7 +7,8 @@ public class CardPickup : MonoBehaviour
     [Header("References")]
     private GameManager gm;
     private DoorController doorController;
-    public StudioEventEmitter FMODPickUp;
+    [SerializeField] private Animator UIAnimator;
+    [SerializeField] private StudioEventEmitter FMODPickUp;
 
     void Start()
     {

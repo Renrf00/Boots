@@ -11,12 +11,12 @@ public class DashModule : MonoBehaviour
     private Vector3 direction = Vector3.forward;
     public float maxDashCharge = 0.5f;
     [HideInInspector] public float currentDashCharge;
-    public float dashSpeed = 50;
+    [SerializeField] private float dashSpeed = 10;
 
     [Header("Special effects")]
-    public int dashingFOV = 110;
-    public float FOVIncreaseSpeed = 5;
-    public float FOVDecreaseSpeed = 1;
+    [SerializeField] private int dashingFOV = 110;
+    [SerializeField] private float FOVIncreaseSpeed = 5;
+    [SerializeField] private float FOVDecreaseSpeed = 1;
 
     void Start()
     {

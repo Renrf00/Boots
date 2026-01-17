@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private DashModule playerDash;
     private Transform spawnpoint;
-    public StudioEventEmitter FMODLand;
-    public StudioEventEmitter FMODDash;
+    [SerializeField] private StudioEventEmitter FMODLand;
+    [SerializeField] private StudioEventEmitter FMODDash;
 
     [Header("Input")]
     private bool moveInput = false;
@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     private bool respawnInput = false;
 
     [Header("Jump control")]
-    public float jumpSpeed = 5;
-    public float jumpCooldown = 0.4f;
+    [SerializeField] private float jumpSpeed = 5;
+    [SerializeField] private float jumpCooldown = 0.4f;
 
     private float currentJumpCooldown;
     private bool grounded = false;
@@ -29,10 +29,10 @@ public class PlayerController : MonoBehaviour
     private bool groundRay = false;
 
     [Header("Movement control")]
-    public float speed = 5;
+    [SerializeField] private float speed = 5;
 
     [Header("Constrains")]
-    public bool spawnInStart = true;
+    [SerializeField] private bool spawnInStart = true;
     [HideInInspector] public bool disableWalking = false;
     [HideInInspector] public bool disableInput = false;
 

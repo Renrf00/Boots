@@ -3,10 +3,10 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     private GameObject player;
-    public Material door;
+    [SerializeField] private Material door;
 
     private bool doorUnlocked = false;
-    public float doorSpeed = 1;
+    [SerializeField] private float doorSpeed = 1;
 
     void Start()
     {

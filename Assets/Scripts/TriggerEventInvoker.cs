@@ -4,10 +4,10 @@ using UnityEngine.Events;
 
 public class TriggerEventInvoker : MonoBehaviour
 {
-    public string checkForTag;
-    public UnityEvent onTriggerEnter;
-    public UnityEvent onTriggerStay;
-    public UnityEvent onTriggerExit;
+    [SerializeField] private string checkForTag;
+    [SerializeField] private UnityEvent onTriggerEnter;
+    [SerializeField] private UnityEvent onTriggerStay;
+    [SerializeField] private UnityEvent onTriggerExit;
 
 
     void OnTriggerEnter(Collider other)

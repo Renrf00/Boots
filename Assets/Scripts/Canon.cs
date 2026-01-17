@@ -5,20 +5,20 @@ using UnityEngine;
 public class Canon : MonoBehaviour
 {
     [Header("References")]
-    public Projectile projectile;
-    public Transform canonMouth;
-    public StudioEventEmitter FMODShoot;
+    [SerializeField] private Projectile projectile;
+    [SerializeField] private Transform canonMouth;
+    [SerializeField] private StudioEventEmitter FMODShoot;
 
     [Header("Canon parameters")]
-    [Min(1)] public int nBullets = 1;
-    [Min(0)] public float startDelay;
-    [Range(0, 1)] public float bulletInterval;
-    [Range(0, 10)] public float burstInterval;
+    [Min(1)][SerializeField] private int nBullets = 1;
+    [Min(0)][SerializeField] private float startDelay;
+    [Range(0, 1)][SerializeField] private float bulletInterval;
+    [Range(0, 10)][SerializeField] private float burstInterval;
 
     [Header("Bullet parameters")]
-    [Min(0.1f)] public float bulletLifetime;
-    [Min(0)] public float bulletSpeed;
-    public bool bulletGravity = true;
+    [Min(0.1f)][SerializeField] private float bulletLifetime;
+    [Min(0)][SerializeField] private float bulletSpeed;
+    [SerializeField] private bool bulletGravity = true;
 
     void OnEnable()
     {

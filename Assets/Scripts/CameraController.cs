@@ -3,12 +3,12 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;
+    [SerializeField] private Transform player;
 
     [Header("Rotation")]
-    public ScriptableNumber sensibility;
-    public float rotationXHighClamp = 90;
-    public float rotationXLowClamp = -60;
+    [SerializeField] private ScriptableNumber sensibility;
+    [SerializeField] private float rotationXHighClamp = 90;
+    [SerializeField] private float rotationXLowClamp = -60;
     private float rotationX;
     private float rotationY;
 

@@ -13,10 +13,10 @@ public class MovingObject : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Platform Movement")]
-    public MovementAxis MovementAxis;
+    [SerializeField] private MovementAxis MovementAxis;
     private Vector3 direction;
-    public float distanceToEnd;
-    public float speed = 1f;
+    [SerializeField] private float distanceToEnd;
+    [SerializeField] private float speed = 1f;
 
     private float startingPositionInAxis;
     private float endingPositionInAxis;

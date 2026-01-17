@@ -10,9 +10,9 @@ public class CheckOnLoad : MonoBehaviour
     [Header("References")]
     private GameManager gm;
 
-    public int ElementAt;
-    public UnityEvent unityEvent;
-    public TMP_Text textTime;
+    [SerializeField] private int ElementAt;
+    [SerializeField] private UnityEvent unityEvent;
+    [SerializeField] private TMP_Text textTime;
 
     void Start()
     {
