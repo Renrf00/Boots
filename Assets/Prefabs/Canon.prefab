@@ -243,16 +243,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d661ca30b2f4ce08e4b0667e63adbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 7389573421407118222, guid: f37e7209186c149da8eaeda616a23687, type: 3}
+  posibleProjectiles: []
   canonMouth: {fileID: 612771163207841242}
   FMODShoot: {fileID: 4917778180144743191}
   nBullets: 1
   startDelay: 0
-  bulletInterval: 0.1
-  burstInterval: 1
+  BulletInterval: 0.075
+  randomizeBurstInterval: 0
+  maxBurstInterval: 0.075
   bulletLifetime: 5
-  speed: 15
-  gravity: 1
+  bulletSpeed: 0
+  bulletGravity: 1
 --- !u!114 &4917778180144743191
 MonoBehaviour:
   m_ObjectHideFlags: 0

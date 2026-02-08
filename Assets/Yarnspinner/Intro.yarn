@@ -2,6 +2,7 @@
 ---
 <<if !CompletedRoom()>>
     <<DisablePlayerControl true>>
+    <<StopTimer>>
     Scientist: Welcome to room 0 of the "Boots testing program"!
     Scientist: To complete each room, you need to pick up the keycard at the end of the room, which will open the door behind that will take you to the next room.
     Scientist: Off you go!

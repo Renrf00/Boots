@@ -4,12 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager gameManagerInstance;
-
+    public static GameManager gameManagerInstance;
 
     [Header("GameState")]
     public LevelState[] levelStates;
     public float subtractToTimer;
+    public float currentTime;
+    public bool stopTimer = true;
     private int roomNumber;
 
     private void Awake()
@@ -19,7 +20,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         gameManagerInstance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -27,11 +27,17 @@ public class GameManager : MonoBehaviour
 
         roomNumber = -1;
     }
+    void Update()
+    {
+        if (!stopTimer)
+        {
+            currentTime = Time.timeSinceLevelLoad - subtractToTimer;
+        }
+    }
 
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -54,6 +60,7 @@ public class GameManager : MonoBehaviour
                 roomNumber = -1;
                 break;
         }
+        stopTimer = false;
     }
     public int GetRoomNumber()
     {
@@ -76,6 +83,28 @@ public class GameManager : MonoBehaviour
     public static GameManager GetGameManager()
     {
         return gameManagerInstance;
+    }
+
+    public string SectondsToString(float timeSeconds)
+    {
+        int minutes = (int)(timeSeconds - timeSeconds % 60) / 60;
+        int seconds = (int)(Math.Truncate(timeSeconds) - minutes * 60);
+        int milliseconds = (int)Math.Truncate((timeSeconds - Math.Truncate(timeSeconds)) * 1000);
+
+        string minutesText = minutes.ToString();
+        string secondsText = seconds.ToString().Length == 1 ? "0" + seconds.ToString() : seconds.ToString();
+        string millisecondsText;
+
+        if (milliseconds.ToString().Length < 3)
+        {
+            millisecondsText = milliseconds.ToString().Length == 2 ? "0" + milliseconds.ToString() : "00" + milliseconds.ToString();
+        }
+        else
+        {
+            millisecondsText = milliseconds.ToString();
+        }
+
+        return minutesText + ":" + secondsText + ":" + millisecondsText;
     }
 }
 

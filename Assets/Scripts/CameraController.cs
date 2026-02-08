@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform player;
 
     [Header("Rotation")]
-    [SerializeField] private ScriptableNumber sensibility;
+    [SerializeField] private ScriptableNumber sensitibity;
     [SerializeField] private float rotationXHighClamp = 90;
     [SerializeField] private float rotationXLowClamp = -60;
     private float rotationX;
@@ -15,8 +15,8 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // rotate based on mouse input
-        rotationX += -sensibility.number * Time.deltaTime * Input.GetAxis("Mouse Y");
-        rotationY += sensibility.number * Time.deltaTime * Input.GetAxis("Mouse X");
+        rotationX += -sensitibity.number * Time.deltaTime * Input.GetAxis("Mouse Y");
+        rotationY += sensitibity.number * Time.deltaTime * Input.GetAxis("Mouse X");
 
         rotationX = Mathf.Clamp(rotationX, -rotationXHighClamp, -rotationXLowClamp);
 

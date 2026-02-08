@@ -4,15 +4,15 @@ using Yarn.Unity;
 
 public class YarnspinnerFunctions
 {
-    [YarnFunction("CompletedRoom")]
+    [YarnFunction]
     public static bool CompletedRoom()
     {
-        GameManager gm = GameObject.FindFirstObjectByType<GameManager>();
+        GameManager gm = GameManager.gameManagerInstance;
 
         return gm.levelStates.ElementAt(gm.GetRoomNumber()).complete;
     }
 
-    [YarnCommand("DisablePlayerControl")]
+    [YarnCommand]
     public static void DisablePlayerControl(bool disable)
     {
         PlayerController player = GameObject.FindFirstObjectByType<PlayerController>();
@@ -34,11 +34,18 @@ public class YarnspinnerFunctions
         }
     }
 
-    [YarnCommand("SetTimerDelay")]
+    [YarnCommand]
     public static void SetTimerDelay()
     {
-        GameManager gm = GameObject.FindFirstObjectByType<GameManager>();
+        GameManager gm = GameManager.gameManagerInstance;
 
         gm.subtractToTimer = Time.timeSinceLevelLoad;
+        gm.stopTimer = false;
+    }
+    [YarnCommand]
+    public static void StopTimer()
+    {
+        GameManager gm = GameManager.gameManagerInstance;
+        gm.stopTimer = true;
     }
 }

@@ -2,15 +2,26 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TriggerEventInvoker : MonoBehaviour
+public class EventInvoker : MonoBehaviour
 {
     [SerializeField] private string checkForTag;
+    [SerializeField] private UnityEvent onStart;
+    [SerializeField] private UnityEvent onUpdate;
     [SerializeField] private UnityEvent onTriggerEnter;
     [SerializeField] private UnityEvent onTriggerStay;
     [SerializeField] private UnityEvent onTriggerExit;
 
+    private void Start()
+    {
+        onStart.Invoke();
+    }
 
-    void OnTriggerEnter(Collider other)
+    private void Update()
+    {
+        onUpdate.Invoke();
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         if (checkForTag == "")
         {
@@ -21,7 +32,7 @@ public class TriggerEventInvoker : MonoBehaviour
             onTriggerEnter.Invoke();
         }
     }
-    void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (checkForTag == "")
         {
@@ -32,7 +43,7 @@ public class TriggerEventInvoker : MonoBehaviour
             onTriggerStay.Invoke();
         }
     }
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (checkForTag == "")
         {

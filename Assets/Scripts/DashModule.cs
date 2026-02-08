@@ -8,7 +8,7 @@ public class DashModule : MonoBehaviour
     private Camera playerCamera;
 
     [Header("Dash")]
-    private Vector3 direction = Vector3.forward;
+    private Vector3 dashDirection = Vector3.forward;
     public float maxDashCharge = 0.5f;
     [HideInInspector] public float currentDashCharge;
     [SerializeField] private float dashSpeed = 10;
@@ -37,13 +37,13 @@ public class DashModule : MonoBehaviour
         }
 
         // calculate direction based on camera (X) and player (Y) rotation
-        direction = Quaternion.Euler(
+        dashDirection = Quaternion.Euler(
             playerCamera.transform.rotation.eulerAngles.x,
             transform.rotation.eulerAngles.y,
             0
         ) * Vector3.forward;
 
-        rb.linearVelocity = direction * dashSpeed;
+        rb.linearVelocity = dashDirection * dashSpeed;
 
         rb.useGravity = false;
 

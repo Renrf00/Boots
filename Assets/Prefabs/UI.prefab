@@ -1600,6 +1600,8 @@ GameObject:
   - component: {fileID: 1098288589614428040}
   - component: {fileID: 8988889905087003905}
   - component: {fileID: 3868285043983132818}
+  - component: {fileID: 4549482171403992310}
+  - component: {fileID: 7102033030882191882}
   m_Layer: 5
   m_Name: CurrentTime
   m_TagString: Untagged
@@ -1725,6 +1727,64 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4549482171403992310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183359787959584800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cbbfa49041494938b0ff97dae9d71e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoomAtIndex: 0
+  checkToEnableEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  text: 'Current time:'
+  textTime: {fileID: 3868285043983132818}
+--- !u!114 &7102033030882191882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183359787959584800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7699a26a34740048bdcc27768fb5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkForTag: 
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4549482171403992310}
+        m_TargetAssemblyTypeName: UpdateTime, Assembly-CSharp
+        m_MethodName: UpdateCurrentTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3419567031966297463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,6 +2044,8 @@ GameObject:
   - component: {fileID: 890328935684933195}
   - component: {fileID: 1261870844590618279}
   - component: {fileID: 2349354938695724376}
+  - component: {fileID: 4765050189203747096}
+  - component: {fileID: 5092763550916417783}
   m_Layer: 5
   m_Name: BestTime
   m_TagString: Untagged
@@ -2109,6 +2171,64 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4765050189203747096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941205348706100467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cbbfa49041494938b0ff97dae9d71e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoomAtIndex: 0
+  checkToEnableEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  text: 'Best time:'
+  textTime: {fileID: 2349354938695724376}
+--- !u!114 &5092763550916417783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941205348706100467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7699a26a34740048bdcc27768fb5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkForTag: 
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4765050189203747096}
+        m_TargetAssemblyTypeName: UpdateTime, Assembly-CSharp
+        m_MethodName: UpdateTextBestTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5789850333655305783
 GameObject:
   m_ObjectHideFlags: 0

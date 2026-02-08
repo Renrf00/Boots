@@ -815,6 +815,7 @@ GameObject:
   - component: {fileID: 644696648}
   - component: {fileID: 644696647}
   - component: {fileID: 644696650}
+  - component: {fileID: 644696651}
   m_Layer: 5
   m_Name: Room 2
   m_TagString: Untagged
@@ -1044,9 +1045,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbbfa49041494938b0ff97dae9d71e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
-  ElementAt: 2
-  unityEvent:
+  RoomAtIndex: 2
+  checkToEnableEvents:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 644696647}
@@ -1061,7 +1061,48 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  text: 'Best time:'
   textTime: {fileID: 1629964720}
+--- !u!114 &644696651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644696645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7699a26a34740048bdcc27768fb5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkForTag: 
+  onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 644696650}
+        m_TargetAssemblyTypeName: UpdateTime, Assembly-CSharp
+        m_MethodName: checkToEnable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &748928504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,6 +1481,7 @@ GameObject:
   - component: {fileID: 1164756470}
   - component: {fileID: 1164756471}
   - component: {fileID: 1164756474}
+  - component: {fileID: 1164756475}
   m_Layer: 5
   m_Name: Room 0
   m_TagString: Untagged
@@ -1669,12 +1711,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbbfa49041494938b0ff97dae9d71e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
-  ElementAt: 0
-  unityEvent:
+  RoomAtIndex: 0
+  checkToEnableEvents:
     m_PersistentCalls:
       m_Calls: []
+  text: 'Best time:'
   textTime: {fileID: 1629964720}
+--- !u!114 &1164756475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164756469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7699a26a34740048bdcc27768fb5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkForTag: 
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1248193389 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1920879482905471818, guid: 08b08766221354a458c6a1f595bd5a34, type: 3}
@@ -1715,6 +1785,7 @@ GameObject:
   - component: {fileID: 1276330119}
   - component: {fileID: 1276330118}
   - component: {fileID: 1276330121}
+  - component: {fileID: 1276330122}
   m_Layer: 5
   m_Name: Room 3
   m_TagString: Untagged
@@ -1944,9 +2015,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbbfa49041494938b0ff97dae9d71e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
-  ElementAt: 3
-  unityEvent:
+  RoomAtIndex: 3
+  checkToEnableEvents:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1276330118}
@@ -1961,7 +2031,48 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  text: 'Best time:'
   textTime: {fileID: 1629964720}
+--- !u!114 &1276330122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276330116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7699a26a34740048bdcc27768fb5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkForTag: 
+  onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1276330121}
+        m_TargetAssemblyTypeName: UpdateTime, Assembly-CSharp
+        m_MethodName: checkToEnable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1397492193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1975,6 +2086,7 @@ GameObject:
   - component: {fileID: 1397492196}
   - component: {fileID: 1397492195}
   - component: {fileID: 1397492198}
+  - component: {fileID: 1397492199}
   m_Layer: 5
   m_Name: Room 1
   m_TagString: Untagged
@@ -2204,9 +2316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbbfa49041494938b0ff97dae9d71e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
-  ElementAt: 1
-  unityEvent:
+  RoomAtIndex: 1
+  checkToEnableEvents:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1397492195}
@@ -2221,7 +2332,48 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  text: 'Best time:'
   textTime: {fileID: 1629964720}
+--- !u!114 &1397492199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397492193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7699a26a34740048bdcc27768fb5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkForTag: 
+  onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1397492198}
+        m_TargetAssemblyTypeName: UpdateTime, Assembly-CSharp
+        m_MethodName: checkToEnable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1505000937 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 330891705734184212, guid: db1e400145d834f698973244597ca6fa, type: 3}
@@ -3252,6 +3404,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -27.60656
       objectReference: {fileID: 0}
+    - target: {fileID: 5870784346943871406, guid: 0c992d7e9ace74fcfb75a25a8567cfa8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5986448675891916242, guid: 0c992d7e9ace74fcfb75a25a8567cfa8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.08105263
@@ -3375,7 +3531,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7236826493442654094, guid: 0c992d7e9ace74fcfb75a25a8567cfa8, type: 3}
     - {fileID: 7844609048932071565, guid: 0c992d7e9ace74fcfb75a25a8567cfa8, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4446939274413655096, guid: 0c992d7e9ace74fcfb75a25a8567cfa8, type: 3}
+    - {fileID: 5870784346943871406, guid: 0c992d7e9ace74fcfb75a25a8567cfa8, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1846598931980483482, guid: 0c992d7e9ace74fcfb75a25a8567cfa8, type: 3}
       insertIndex: 0
@@ -3638,6 +3796,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 884623481035016006, guid: 5341d401ad3a044608713a09fd5aba1a, type: 3}
+      propertyPath: stopTimer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2825470190384964519, guid: 5341d401ad3a044608713a09fd5aba1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

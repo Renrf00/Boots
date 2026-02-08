@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 716285607069731961}
   - component: {fileID: 7389573421407118222}
   m_Layer: 0
-  m_Name: CanonBall
+  m_Name: JumpBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4a163a3004ba4824292e240ee53a322f, type: 2}
+  - {fileID: 2100000, guid: 80435d64b0fa8a14ab34498598716bd4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,7 +118,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087002639355030150}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkTag: Player
-  projectileType: 2
-  force: 0.1
-  knockDuration: 0.1
+  projectileType: 0
+  force: 5
+  knockDuration: 0.2
   lifetime: 10
   minY: -10

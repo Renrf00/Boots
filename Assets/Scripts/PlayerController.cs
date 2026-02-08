@@ -23,18 +23,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpCooldown = 0.4f;
 
     private float currentJumpCooldown;
-    private bool grounded = false;
+    private bool isGrounded = false;
     private bool firstGrounded = true;
-    private bool groundCollision = false;
-    private bool groundRay = false;
+    private bool touchingGround = false;
+    private bool nearGround = false;
 
     [Header("Movement control")]
-    [SerializeField] private float speed = 5;
+    [SerializeField] private float walkingSpeed = 5;
 
     [Header("Constrains")]
     [SerializeField] private bool spawnInStart = true;
-    [HideInInspector] public bool disableWalking = false;
-    [HideInInspector] public bool disableInput = false;
+    public bool disableWalking = false;
+    public bool disableInput = false;
 
     void Start()
     {
@@ -48,32 +48,38 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (groundRay && groundCollision)
+        if (nearGround && touchingGround)
         {
             if (firstGrounded)
             {
                 FMODLand.Play();
                 firstGrounded = false;
             }
-            grounded = true;
+            isGrounded = true;
         }
         else
         {
-            grounded = false;
+            isGrounded = false;
             firstGrounded = true;
         }
 
         if (currentJumpCooldown > 0)
             currentJumpCooldown -= Time.deltaTime;
 
-        if (grounded && playerDash.currentDashCharge < playerDash.maxDashCharge)
+        if (isGrounded && playerDash.currentDashCharge < playerDash.maxDashCharge)
             playerDash.currentDashCharge += Time.deltaTime;
 
         Mathf.Clamp(currentJumpCooldown, 0, jumpCooldown);
         Mathf.Clamp(playerDash.currentDashCharge, 0, playerDash.maxDashCharge);
 
         if (disableInput)
+        {
+            moveInput = false;
+            jumpInput = false;
+            dashInput = false;
+            respawnInput = false;
             return;
+        }
 
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
             moveInput = true;
@@ -108,9 +114,9 @@ public class PlayerController : MonoBehaviour
     {
         // do some raycasts + parent moving objects it detects
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, 1.1f))
-            groundRay = true;
+            nearGround = true;
         else
-            groundRay = false;
+            nearGround = false;
 
         if (respawnInput)
         {
@@ -130,7 +136,7 @@ public class PlayerController : MonoBehaviour
             playerDash.StopDash();
         }
 
-        if (jumpInput && grounded && currentJumpCooldown <= 0)
+        if (jumpInput && isGrounded && currentJumpCooldown <= 0)
         {
             Jump();
         }
@@ -143,7 +149,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            groundCollision = true;
+            touchingGround = true;
         }
     }
 
@@ -151,7 +157,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            groundCollision = false;
+            touchingGround = false;
         }
     }
 
@@ -160,9 +166,9 @@ public class PlayerController : MonoBehaviour
         Vector3 lastLinearVelocity = rb.linearVelocity;
 
         Vector3 movement = new Vector3(
-            speed * Input.GetAxis("Horizontal"),
+            walkingSpeed * Input.GetAxis("Horizontal"),
             lastLinearVelocity.y,
-            speed * Input.GetAxis("Vertical"));
+            walkingSpeed * Input.GetAxis("Vertical"));
 
         rb.linearVelocity = Quaternion.Euler(0, transform.eulerAngles.y, 0) * movement;
     }

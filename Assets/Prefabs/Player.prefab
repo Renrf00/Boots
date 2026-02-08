@@ -155,21 +155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e919ab19ea641aaa873728e26fab61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  playerDash: {fileID: 0}
-  spawnpoint: {fileID: 0}
   FMODLand: {fileID: 3695125713651284589}
   FMODDash: {fileID: 4000108596932858355}
-  moveInput: 0
-  jumpInput: 0
-  dashInput: 0
-  respawnInput: 0
   jumpSpeed: 5
   jumpCooldown: 0.4
-  currentJumpCooldown: 0
-  grounded: 0
-  groundCollision: 0
-  groundRay: 0
   speed: 7
   spawnInStart: 1
   disableWalking: 0
@@ -186,16 +175,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6207fe3e3c640869692abc7982c13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  playerController: {fileID: 0}
-  playerCamera: {fileID: 0}
-  direction: {x: 0, y: 0, z: 1}
-  dashCharge: 0.5
+  maxDashCharge: 0.4
   currentDashCharge: 0
-  speed: 10
+  dashSpeed: 12
   dashingFOV: 110
-  FOVincrease: 5
-  FOVdecrease: 1
+  FOVIncreaseSpeed: 5
+  FOVDecreaseSpeed: 1
 --- !u!114 &3695125713651284589
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,15 +13,15 @@ public class MovingObject : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Platform Movement")]
+    [SerializeField] private bool MoveWhenPlayer;
     [SerializeField] private MovementAxis MovementAxis;
-    private Vector3 direction;
+    private Vector3 platformDirection;
     [SerializeField] private float distanceToEnd;
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float platformSpeed = 1f;
 
     private float startingPositionInAxis;
     private float endingPositionInAxis;
     private float positionInAxis;
-
 
     [Header("Gizmos")]
     public Color gizmosColor = new Color(255, 255, 0, 150);
@@ -33,7 +33,7 @@ public class MovingObject : MonoBehaviour
         switch (MovementAxis)
         {
             case MovementAxis.rightLeft:
-                direction = (distanceToEnd > 0) ? Vector3.right : Vector3.left;
+                platformDirection = (distanceToEnd > 0) ? Vector3.right : Vector3.left;
                 rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 
                 startingPositionInAxis = transform.position.x;
@@ -41,7 +41,7 @@ public class MovingObject : MonoBehaviour
                 break;
 
             case MovementAxis.upDown:
-                direction = (distanceToEnd > 0) ? Vector3.up : Vector3.down;
+                platformDirection = (distanceToEnd > 0) ? Vector3.up : Vector3.down;
                 rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 
                 startingPositionInAxis = transform.position.y;
@@ -49,7 +49,7 @@ public class MovingObject : MonoBehaviour
                 break;
 
             case MovementAxis.forwardBackward:
-                direction = (distanceToEnd > 0) ? Vector3.forward : Vector3.back;
+                platformDirection = (distanceToEnd > 0) ? Vector3.forward : Vector3.back;
                 rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
 
                 startingPositionInAxis = transform.position.z;
@@ -60,22 +60,29 @@ public class MovingObject : MonoBehaviour
 
     void FixedUpdate()
     {
-        positionInAxis = GetAxisValue(transform.position, MovementAxis);
+        positionInAxis = GetAxisValue(transform.position);
 
-        if (positionInAxis <= Mathf.Min(startingPositionInAxis, endingPositionInAxis))
+        if (!MoveWhenPlayer)
         {
-            direction = SetAxisValue(direction, 1, MovementAxis);
+            if (positionInAxis <= Mathf.Min(startingPositionInAxis, endingPositionInAxis))
+            {
+                platformDirection = SetAxisValue(platformDirection, 1);
+            }
+            else if (positionInAxis >= Mathf.Max(startingPositionInAxis, endingPositionInAxis))
+            {
+                platformDirection = SetAxisValue(platformDirection, -1);
+            }
+            else if (rb.linearVelocity == Vector3.zero)
+            {
+                platformDirection *= -1;
+            }
         }
-        else if (positionInAxis >= Mathf.Max(startingPositionInAxis, endingPositionInAxis))
+        else
         {
-            direction = SetAxisValue(direction, -1, MovementAxis);
-        }
-        else if (rb.linearVelocity == Vector3.zero)
-        {
-            direction *= -1;
+
         }
 
-        rb.linearVelocity = direction * speed;
+        rb.linearVelocity = platformDirection * platformSpeed;
     }
 
     void OnDrawGizmosSelected()
@@ -83,24 +90,24 @@ public class MovingObject : MonoBehaviour
         switch (MovementAxis)
         {
             case MovementAxis.rightLeft:
-                direction = Vector3.right;
+                platformDirection = Vector3.right;
                 break;
 
             case MovementAxis.upDown:
-                direction = Vector3.up;
+                platformDirection = Vector3.up;
                 break;
 
             case MovementAxis.forwardBackward:
-                direction = Vector3.forward;
+                platformDirection = Vector3.forward;
                 break;
         }
 
         Gizmos.color = gizmosColor;
-        Gizmos.DrawLine(transform.position, transform.position + direction * distanceToEnd);
-        Gizmos.DrawCube(transform.position + direction * distanceToEnd + GetComponent<BoxCollider>().center, GetComponent<BoxCollider>().size);
+        Gizmos.DrawLine(transform.position, transform.position + platformDirection * distanceToEnd);
+        Gizmos.DrawCube(transform.position + platformDirection * distanceToEnd + GetComponent<BoxCollider>().center, GetComponent<BoxCollider>().size);
     }
 
-    private float GetAxisValue(Vector3 vector, MovementAxis movementAxis)
+    private float GetAxisValue(Vector3 vector)
     {
         switch (MovementAxis)
         {
@@ -115,9 +122,9 @@ public class MovingObject : MonoBehaviour
         }
     }
 
-    private Vector3 SetAxisValue(Vector3 vector, float value, MovementAxis movementAxis)
+    private Vector3 SetAxisValue(Vector3 vector, float value)
     {
-        switch (movementAxis)
+        switch (MovementAxis)
         {
             case MovementAxis.rightLeft:
                 vector = new Vector3(value, vector.y, vector.z);
