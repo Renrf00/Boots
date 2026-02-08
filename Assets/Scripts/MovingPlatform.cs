@@ -7,7 +7,7 @@ public enum MovementAxis
     forwardBackward
 }
 
-public class MovingObject : MonoBehaviour
+public class MovingPlatform : MonoBehaviour
 {
     [Header("References")]
     private Rigidbody rb;
@@ -23,10 +23,12 @@ public class MovingObject : MonoBehaviour
     private float endingPositionInAxis;
     private float positionInAxis;
 
+    private bool playerOnPlatform;
+
     [Header("Gizmos")]
     public Color gizmosColor = new Color(255, 255, 0, 150);
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
 
@@ -58,7 +60,7 @@ public class MovingObject : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         positionInAxis = GetAxisValue(transform.position);
 
@@ -76,16 +78,35 @@ public class MovingObject : MonoBehaviour
             {
                 platformDirection *= -1;
             }
+
+            rb.linearVelocity = platformDirection * platformSpeed;
         }
         else
         {
+            if (playerOnPlatform)
+            {
+                if (positionInAxis >= Mathf.Max(startingPositionInAxis, endingPositionInAxis))
+                {
+                    platformDirection = SetAxisValue(platformDirection, 0);
+                }
+                else
+                    platformDirection = SetAxisValue(platformDirection, 1);
+            }
+            else
+            {
+                if (positionInAxis <= Mathf.Min(startingPositionInAxis, endingPositionInAxis))
+                {
+                    platformDirection = SetAxisValue(platformDirection, 0);
+                }
+                else
+                    platformDirection = SetAxisValue(platformDirection, -1);
+            }
 
+            rb.linearVelocity = platformDirection * platformSpeed;
         }
-
-        rb.linearVelocity = platformDirection * platformSpeed;
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         switch (MovementAxis)
         {
@@ -105,6 +126,22 @@ public class MovingObject : MonoBehaviour
         Gizmos.color = gizmosColor;
         Gizmos.DrawLine(transform.position, transform.position + platformDirection * distanceToEnd);
         Gizmos.DrawCube(transform.position + platformDirection * distanceToEnd + GetComponent<BoxCollider>().center, GetComponent<BoxCollider>().size);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerOnPlatform = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerOnPlatform = false;
+        }
     }
 
     private float GetAxisValue(Vector3 vector)
